@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="accountCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="productCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="categoryCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="chequeCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="transactionCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="unitCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="salebookCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="yearCheckBox" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                      <Component id="saveButton" min="-2" pref="91" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="cancelButton" min="-2" pref="86" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="purchaseCheckBox" min="-2" max="-2" attributes="0"/>
+                  <Component id="dayCheckBox" min="-2" max="-2" attributes="0"/>
+                  <Component id="cashbookCheckBox" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="accountCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="yearCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dayCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="productCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="salebookCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="purchaseCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="categoryCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="unitCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cashbookCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="chequeCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="transactionCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="SETTING"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="accountCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ACCOUNT"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="yearCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="YEAR"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="dayCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="DAY"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="productCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="PRODUCT"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="salebookCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="SALE BOOK"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="purchaseCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="PURCHASE BOOK"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="categoryCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="CATEGORY"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="unitCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="MEASUREMENT UNIT"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="cashbookCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="CASH BOOK"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chequeCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="CHEQUE BOOK"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="transactionCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="TRANSACTION SUMMARY"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="saveButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="cancelButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancel"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

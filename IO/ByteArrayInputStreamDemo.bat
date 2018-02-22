@@ -1,0 +1,3 @@
+javac PushbackStreamDemo.java
+java PushbackStreamDemo
+pause

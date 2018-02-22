@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+      <hibernate-mapping>
+          <class name="Faculty" table="faculty">
+               <meta attribute="class-description">
+               </meta>
+               <id name="factId" type="int" column="fact_id">
+                     <generator class="native"/>
+               </id>
+               <property name="factName" column="Fact_Name" type="string"/>
+               <property name="remarks" column="Remarks" type="string"/>
+
+           </class>
+      </hibernate-mapping>

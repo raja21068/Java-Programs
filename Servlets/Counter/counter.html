@@ -1,0 +1,13 @@
+<!--script language="javascript">
+	var x = 10;
+	//setInterval(function(){if(true){document.write(""+(x--));}},1000);
+	setInterval(function(){if(true){document.value=(x--);}},1000);
+</script-->
+
+<html>
+	<form name=form action="http://localhost:8081/servlet/Counter">
+		<input type="text" name="count">
+		<input type=submit value="counter start">
+	</form>
+	<p id="c" name="c"></p>
+</html>

@@ -1,0 +1,28 @@
+<html>
+	<head>
+	<style>
+		div{
+			border: 2px solid #FFD2DE;
+			width: 90%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+	</head>
+	
+	<body>
+		
+	<div align="center">	
+	<form action='OnlineShopping'>
+		<a href="search.html">Search</a>
+		<!--input type='text' id="searchbar" name="searchBar" onfocus="this.value=''{this.style.color=#333;this.style.fontStyle=normal}" value="What are you looking for?" onblur="{this.style.fontStyle='normal';this.style.color='#7f7f7f';this.value='What are you looking for?';}"-->
+		 <input style="font-style: normal; color: rgb(127, 127, 127);" size="31" maxlength="300" name="searchbox" value="What are you looking for?" onfocus="if(this.value=='What are you looking for?'){this.value='';this.style.color='#000000';this.style.fontStyle='normal'}" onblur="if(this.value==''){this.style.fontStyle='normal';this.style.color='#7f7f7f';this.value='What are you looking for?';}" type="text">
+		<input type='submit' value='Search' >
+		<a href="adform.html">Upload a Free Ad</a>
+		
+	</form>
+	
+	
+	</div>
+	</body>
+</html>

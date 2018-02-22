@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Created-By: 1.3.1_02 (Sun Microsystems Inc.)
+
+Name: javax/media/bean/playerbean/MediaPlayer.class
+Java-Bean: True
+

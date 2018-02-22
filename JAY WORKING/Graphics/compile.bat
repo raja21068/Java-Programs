@@ -1,0 +1,3 @@
+javac PaintingAndStroking.java
+java PaintingAndStroking
+pause

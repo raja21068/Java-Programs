@@ -1,0 +1,15 @@
+SELECT t.name, d.days_name, tm.time, c.course_name
+FROM 
+
+part p, time_table tt, teacher t, days d, time tm, courses c
+
+WHERE 
+p.part_id = tt.part_id AND p.part_id = $part_id 
+AND 
+t.teacher_id = tt.teacher_id
+AND 
+tt.days_id = d.days_id
+AND 
+tm.time_id = tt.time_id
+AND 
+c.course_id = tt.course_id

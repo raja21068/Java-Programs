@@ -1,0 +1,4 @@
+xampbin=C:\Program Files\MySQL\MySQL Server 5.5\bin
+database=suresh_shop
+username=root
+password=root

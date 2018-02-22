@@ -1,0 +1,3 @@
+javac MathExpression.java
+java MathExpression
+pause

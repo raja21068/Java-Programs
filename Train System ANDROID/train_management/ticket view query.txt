@@ -1,0 +1,59 @@
+SELECT * FROM ticket t, schedule_detail shd, schedule sh, days d
+WHERE
+t.from_rout_id = 3
+AND
+t.to_rout_id = 4
+AND
+t.detail_id = shd.detail_id
+AND
+shd.schedule_id = sh.schedule_id
+AND
+sh.train_id = 1
+AND
+sh.day_id = d.days_id
+AND
+d.date_of_train = '2013-12-16'
+
+
+SELECT tr.train_name, d.date_of_train, b.bogie_name, SUM(b.no_of_seats)
+FROM train tr, days d, schedule_detail shd, schedule sh, bogies b
+WHERE shd.schedule_id = sh.schedule_id
+AND sh.train_id = tr.train_id
+AND sh.day_id = d.days_id
+AND shd.bogie_id = b.bogies_id
+GROUP BY b.bogie_name
+
+SELECT train_name, date_of_train, city_from, city_to, bogie_name, COUNT(ticket_id)
+FROM reserved
+GROUP BY bogie_name, city_from, city_to
+
+CREATE VIEW SELECT c1.city_from, c2.city_to, t1.train_name, t1.train_id, r1.junction_no as _from, r2.junction_no as _to
+FROM train t1, train t2, rout r1, rout r2, city c1, city c2
+WHERE 
+
+t1.train_id = t2.train_id AND
+
+
+(    
+t1.train_id = r1.train_id AND
+r1.city_id = c1.city_id
+)
+
+AND
+
+(
+t2.train_id = r2.train_id AND
+r2.city_id = c2.city_id
+)
+
+
+
+/*this query is for retrieving all the seats available by detail id and seat type*/
+
+SELECT shd.detail_id, s.seat_id, s.seat_no
+FROM schedule_detail shd, bogies b, seats s
+WHERE 
+shd.bogie_id = b.bogies_id
+AND b.bogies_id = s.bogie_id
+AND shd.detail_id =14
+AND s.seat_type = 'seat'

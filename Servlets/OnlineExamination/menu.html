@@ -1,0 +1,54 @@
+<html>
+	<head>
+	<style>
+	body{
+		margin: 0px;
+		padding: 0px;
+		background-color: black;
+	}
+	input{
+			
+	}
+	a,li{
+		color: white;
+		text-decoration: none;
+		padding-top: 10px;
+	}
+	#home{
+		color: white;
+		display:block;
+		border-bottom: 2px solid white;
+		border-left: 5px solid white;
+	}
+	
+	li>a:hover{
+		text-align:center;
+		display:block;
+		border-bottom: 2px solid white;
+		border-left: 5px solid white;
+	}
+	ul{
+		margin: 0px;
+		padding: 0px;
+		list-style: none;
+	}
+	
+	</style>
+	</head>
+
+<body>
+	<ul>
+		<li><a href='home.html' target='display' id='home'>Home</a></li>
+		<li><form action='ExaminationServlet' target='display'>
+		<input type='hidden' name='identify' value='admin'>
+		<input type='image' value='Admin' id="home">
+		</form>
+		</li>
+		
+		<li><form action='ExaminationServlet' target='display'>
+		<input type='hidden' name='identify' value='subjectslist'>
+		<input type='image' value='Examination' id="home"></form></li>
+		
+	</ul>
+</body>
+</html>

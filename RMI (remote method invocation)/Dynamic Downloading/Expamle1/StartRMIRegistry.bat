@@ -1,0 +1,1 @@
+start rmiregistry -J-Djava.security.policy=Sachal.policy

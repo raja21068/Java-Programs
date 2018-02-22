@@ -1,0 +1,8 @@
+MIDlet-1: AssignmentThird, AssignmentThird.png, ConnectorMIDlet
+MIDlet-Jar-Size: 100
+MIDlet-Jar-URL: AssignmentThird.jar
+MIDlet-Name: AssignmentThird
+MIDlet-Vendor: Unknown
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.1

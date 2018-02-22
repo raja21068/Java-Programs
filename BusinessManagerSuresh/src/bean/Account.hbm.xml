@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 29, 2013 9:01:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="bean.Account" table="account" catalog="suresh_shop">
+        <id name="accountId" type="java.lang.Integer">
+            <column name="ACCOUNT_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="accountName" type="string">
+            <column name="ACCOUNT_NAME" length="60" not-null="true" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="100" not-null="true" />
+        </property>
+        <property name="accountType" type="int">
+            <column name="ACCOUNT_TYPE" not-null="true" />
+        </property>
+        <property name="mobileNo" type="string">
+            <column name="MOBILE_NO" length="15" not-null="true" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="REMARKS" length="60" not-null="true" />
+        </property>
+        <property name="isDeleted" type="boolean">
+            <column name="IS_DELETED" not-null="true" />
+        </property>
+        <set name="cheques" inverse="true">
+            <key>
+                <column name="ACCOUNT_ID" not-null="true" />
+            </key>
+            <one-to-many class="bean.Cheque" />
+        </set>
+        <set name="transactions" inverse="true">
+            <key>
+                <column name="ACCOUNT_ID" not-null="true" />
+            </key>
+            <one-to-many class="bean.Transaction" />
+        </set>
+        <set name="salePurchases" inverse="true">
+            <key>
+                <column name="ACCOUNT_ID" not-null="true" />
+            </key>
+            <one-to-many class="bean.SalePurchase" />
+        </set>
+    </class>
+</hibernate-mapping>

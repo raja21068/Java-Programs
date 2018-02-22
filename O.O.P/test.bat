@@ -1,0 +1,3 @@
+javac TestSynchronized.java
+java TestSynchronized
+pause

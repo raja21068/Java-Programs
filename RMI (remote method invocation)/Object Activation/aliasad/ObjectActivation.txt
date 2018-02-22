@@ -1,0 +1,114 @@
+step 1:
+----------
+c:\java\bin>edit Calc.java
+
+import java.rmi.*;
+
+interface Calc extends Remote{
+	int add(int a, int b)throws RemoteException;
+}
+
+
+step 2:
+---------
+c:\java\bin>edit CalcImp.java
+
+import java.rmi.*;
+import java.rmi.activation.*;
+
+public class CalcImp extends Activatable implements Calc{
+	public CalcImp(ActivationID id, MarshalledObject data)throws RemoteException{
+		super(id, 0);
+	}
+
+	public int add(int a, int b)throws RemoteException{
+		return a+b;
+	}
+}
+
+
+step 3:
+----------
+c:\java\bin>edit sachal.policy
+
+grant{
+     permission java.security.AllPermission;
+ };
+
+
+
+step 4:
+----------
+c:\java\bin>edit Setup.java
+
+import java.rmi.*;
+import java.rmi.activation.*;
+import java.util.Properties;
+
+class Setup{
+	public static void main(String arg[])throws Exception{
+		System.setSecurityManager(new RMISecurityManager());
+
+		Properties p = new Properties();
+		p.put("java.security.policy", "sachal.policy");
+
+		ActivationGroupDesc.CommandEnvironment ace = null;
+		ActivationGroupDesc exampleGroup = new ActivationGroupDesc(p, ace);
+		ActivationGroupID id = ActivationGroup.getSystem().registerGroup(exampleGroup);
+
+		String location = "file://c:/java/bin/";
+		MarshalledObject data = null;
+		ActivationDesc desc = new ActivationDesc(id, "CalcImp", location, data);
+
+		Calc ob = (Calc)Activatable.register(desc);
+		System.out.println("Got stub of CalcImp");
+
+		Naming.rebind("ali", ob);
+		System.out.println("Exported CalcImp");
+		System.exit(0);
+	}
+}
+
+
+step 4:
+----------
+c:\java\bin>edit Client.java
+
+import java.rmi.*;
+
+public class Client {
+	public static void main(String args[])throws Exception {	
+		System.setSecurityManager(new RMISecurityManager());
+
+		String location = "rmi://localhost:1099/ali";
+		Calc ob = (Calc)Naming.lookup(location);
+
+		System.out.println("Making remote call to the server");
+		int num = ob.add(5, 10);
+		System.out.println("Returned from remote call");
+		System.out.println("Result: " + num);
+	}
+}
+
+
+step 5:
+----------
+c:\java\bin>javac *.java
+c:\java\bin>rmic CalcImp
+
+step 6:
+----------
+c:\java\bin>start rmiregistry
+c:\java\bin>start rmid -J-Djava.security.policy=sachal.policy
+
+step 7:
+----------
+c:\java\bin>java -Djava.security.policy=sachal.policy Setup
+
+step 8:
+----------
+c:\java\bin>java -Djava.security.policy=sachal.policy Client
+pause..
+
+>> Its not a joke <<
+>>   its JAVA :D  <<

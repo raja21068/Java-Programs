@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+      <hibernate-mapping>
+          <class name="EVENTMESSAGES" table="EVENT_MESSAGES">
+               <meta attribute="class-description">
+               </meta>
+               <id name="eventId" type="int" column="event_id">
+                     <generator class="native"/>
+               </id>
+               <property name="batchId" column="batch_id" type="int"/>
+               <property name="eventDesc" column="event_desc" type="string"/>
+               <property name="eventTittle" column="event_tittle" type="string"/>
+               <property name="dateOfSend" column="date_of_send" type="date"/>
+               <property name="remarks" column="remarks" type="string"/>
+
+           </class>
+      </hibernate-mapping>

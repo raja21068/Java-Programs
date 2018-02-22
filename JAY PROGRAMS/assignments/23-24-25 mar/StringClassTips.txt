@@ -1,0 +1,26 @@
+
+"a"=="a"
+"a".equals("a")
+
+"Hello".substring(0,2);
+
+" Hello Hi ".trim();
+"AA".compareTo("A");
+ 
++ve
+-ve
+0
+
+byte b[] = "Hello".getBytes();
+
+"Hello".startsWith("Hello")
+"Hello".endsWith("llo")
+System.out.println(b);
+
+String s[] = "Hello Java".split(" ");
+
+String s = "Hello Java";
+
+s = s.replaceAll("l", "y");
+
+

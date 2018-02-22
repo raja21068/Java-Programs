@@ -1,0 +1,3 @@
+javac FileCopyInGUI.java
+java FileCopyInGUI
+pause

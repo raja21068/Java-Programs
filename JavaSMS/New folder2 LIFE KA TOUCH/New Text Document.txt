@@ -1,0 +1,9 @@
+Vector v = new Vector();
+Vector v2 = new Vector();
+for(int i = 0; i < v.size(); i++){
+    v2.addElement(v.elementAt(i));
+    if(v2.size() == 20){
+         book.append(new Report(v2), pageFormat);
+         v2 = new Vector();
+    }    
+}

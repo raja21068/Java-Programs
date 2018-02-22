@@ -1,0 +1,22 @@
+package clonevideoreceiving;
+
+import java.awt.*;
+import javax.swing.JFrame;
+
+/**
+ * Title:        Clone Video Receing System
+ * Description:  This Program will receies simultanously videos from different locations
+ * Copyright:    Copyright (c) 2005
+ * Company:      IIT, University of Sindh, Jamshoro
+ * @author Sachal Joyo
+ * @version 1.0
+ */
+
+public class CloneReceivingFrame extends JFrame {
+
+  public CloneReceivingFrame() {
+  }
+  public static void main(String[] args) {
+    CloneReceivingFrame cloneReceivingFrame = new CloneReceivingFrame();
+  }
+}

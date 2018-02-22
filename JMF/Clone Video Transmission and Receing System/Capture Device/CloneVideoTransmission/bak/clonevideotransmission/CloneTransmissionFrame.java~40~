@@ -1,0 +1,385 @@
+package clonevideotransmission;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+//media classes
+import javax.media.*;
+import javax.media.protocol.*;
+import javax.media.protocol.DataSource;
+import javax.media.format.*;
+import javax.media.control.TrackControl;
+import javax.media.control.QualityControl;
+import java.io.*;
+
+
+/**
+ * Title:        Multicast Video Transmission System
+ * Description:  This program will demostrate u to transfer video to multiple clients at the same time
+ * Copyright:    Copyright (c) 2005
+ * Company:      Institute of Information Tecehnology, University Sindh, Jamshoro
+ * @author Sachal Joyo
+ * @version 1.0
+ */
+
+public class CloneTransmissionFrame extends JFrame implements ActionListener{
+  JLabel headingLabel = new JLabel();
+  JButton transmitButton = new JButton();
+  JTextField ipAddressTextField = new JTextField();
+  JLabel ipAddressLabel = new JLabel();
+
+  private int mediaPort=10000;
+  private boolean isClone=false;
+  private DataSource ds;
+
+  public CloneTransmissionFrame() {
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+  private void jbInit() throws Exception {
+
+    headingLabel.setFont(new java.awt.Font("Serif", 1, 20));
+    headingLabel.setText("Clone Example of Video Transmission");
+    headingLabel.setBounds(new Rectangle(52, 31, 331, 35));
+    this.getContentPane().setLayout(null);
+    this.setFont(new java.awt.Font("Serif", 1, 25));
+    transmitButton.setText("Transmit/new Data Source");
+    transmitButton.setBounds(new Rectangle(96, 169, 226, 29));
+    ipAddressTextField.setBounds(new Rectangle(96, 135, 226, 29));
+    ipAddressLabel.setText("Please Enter IP Address");
+    ipAddressLabel.setBounds(new Rectangle(96, 112, 229, 29));
+
+    this.getContentPane().add(headingLabel, null);
+    this.getContentPane().add(transmitButton, null);
+    this.getContentPane().add(ipAddressTextField, null);
+    this.getContentPane().add(ipAddressLabel, null);
+
+    transmitButton.addActionListener(this);
+
+    this.setBounds(0,0,400,250);
+    this.show();
+  }
+
+ public void actionPerformed(ActionEvent e){
+    if(transmitButton==e.getSource()){
+         String ipAddress=ipAddressTextField.getText();
+         new TransmitHandlerClient(mediaPort,ipAddress,isClone).start();
+         new TransmitVideo(ipAddress,mediaPort,isClone).start();
+         mediaPort+=2;
+         isClone=true;
+     }//end if
+ }
+
+
+ private class TransmitVideo extends Thread{
+  private String ipAddress;
+  private int port;
+  private boolean isClone;
+
+  private Processor processor;
+  private DataSink  rtptransmitter;
+  private DataSource dataOutput;
+
+  public TransmitVideo(String ipAddress,int port,boolean isClone){
+    this.ipAddress=ipAddress;
+    this.port=port;
+    this.isClone=isClone;
+  }//end of cons.
+
+   public void stopTransmission() {
+	synchronized (this){
+	    if (processor != null) {
+		processor.stop();
+		processor.close();
+		processor = null;
+		rtptransmitter.close();
+		rtptransmitter = null;
+	    }//end if
+	}//end block
+    }//end stopTransmission()
+
+
+  public void run(){
+     String result=startTransmission();
+     if(result!=null) System.out.println(result);
+  }//end of run()
+
+  private String startTransmission(){
+  	String result = createProcessor();
+	if (result != null) return result;
+
+	result = createTransmitter();
+	if (result != null) {
+	    processor.close();
+	    processor = null;
+	    return result;
+	 }
+	processor.start();
+	return null;
+  }//end startTrasmission()
+   private String createProcessor() {
+   try {
+     if(isClone==false){
+
+        String defaultVideoDeviceName = "Microsoft WDM Image Capture";
+        String defaultVideoFormatString = "size=176x144, encoding=rgb, maxdatalength=76032";
+        String defaultAudioDeviceName = "DirectSoundCapture";
+        String defaultAudioFormatString = "linear, 16000.0 hz, 8-bit, mono, unsigned";
+
+        CaptureDeviceInfo captureVideoDevice =null;
+        CaptureDeviceInfo captureAudioDevice =null;
+        VideoFormat	    captureVideoFormat =null;
+        AudioFormat	    captureAudioFormat =null;
+
+	java.util.Vector deviceListVector = CaptureDeviceManager.getDeviceList(null);
+
+	if (deviceListVector == null){
+	    System.out.println("Error: media device list vector is null, program aborted");
+	    System.exit(1);
+	}//end if
+
+	if (deviceListVector.size() == 0){
+		System.out.println("Error: media device list vector size is 0, program aborted");
+		System.exit(1);
+	}//end if
+
+	for (int x = 0; x < deviceListVector.size(); x++){
+
+			CaptureDeviceInfo deviceInfo = (CaptureDeviceInfo) deviceListVector.elementAt(x);
+			String deviceInfoText = deviceInfo.getName();
+
+			Format deviceFormat[] = deviceInfo.getFormats();
+			for (int y = 0; y < deviceFormat.length; y++)			{
+				if (captureVideoDevice == null)
+					if (deviceFormat[y] instanceof VideoFormat)
+					if (deviceInfo.getName().indexOf(defaultVideoDeviceName) >= 0)
+    				        {
+					  captureVideoDevice = deviceInfo;
+  					  System.out.println(">>> capture video device = " + deviceInfo.getName());
+				        }
+
+				if (captureVideoDevice == deviceInfo)
+					if (captureVideoFormat == null)
+					if (DeviceInfo.formatToString(deviceFormat[y]).indexOf(defaultVideoFormatString) >= 0)
+				        {
+					  captureVideoFormat = (VideoFormat) deviceFormat[y];
+					  System.out.println(">>> capture video format = " + DeviceInfo.formatToString(deviceFormat[y]));
+				        }
+
+				if (captureAudioDevice == null)
+					if (deviceFormat[y] instanceof AudioFormat)
+					if (deviceInfo.getName().indexOf(defaultAudioDeviceName) >= 0)
+				         {
+ 					   captureAudioDevice = deviceInfo;
+					   System.out.println(">>> capture audio device = " + deviceInfo.getName());
+				         }
+
+				if (captureAudioDevice == deviceInfo)
+					if (captureAudioFormat == null)
+					if (DeviceInfo.formatToString(deviceFormat[y]).indexOf(defaultAudioFormatString) >= 0)
+				         {
+					   captureAudioFormat = (AudioFormat) deviceFormat[y];
+					   System.out.println(">>> capture audio format = " + DeviceInfo.formatToString(deviceFormat[y]));
+				         }
+
+			}//inner for loop printing formats
+		}//outer for loop printing devices
+
+
+        if(captureVideoDevice==null){
+           System.out.println("captureVideoDevice=null");
+           return "captureVideoDevice=null";
+        }//end if
+
+
+
+             //MediaLocator locator=captureVideoDevice.getLocator();
+
+
+   	      ds = Manager.createDataSource(locator);
+              ds=Manager.createCloneableDataSource(ds);
+              processor = Manager.createProcessor(ds);
+
+          }
+        else{
+	     DataSource dss=((SourceCloneable)ds).createClone();
+             processor = Manager.createProcessor(dss);
+
+          }
+
+	boolean result = waitForState(processor, Processor.Configured);
+	if (result == false)
+	    return "Couldn't configure processor";
+
+	TrackControl [] tracks = processor.getTrackControls();
+	if (tracks == null || tracks.length < 1)
+	    return "Couldn't find tracks in processor";
+
+	boolean programmed = false;
+	for (int i = 0; i < tracks.length; i++) {
+	    Format format = tracks[i].getFormat();
+	    if (  tracks[i].isEnabled() &&
+		  format instanceof VideoFormat &&
+		  !programmed) {
+
+		Dimension size = ((VideoFormat)format).getSize();
+		float frameRate = ((VideoFormat)format).getFrameRate();
+		int w = (size.width % 8 == 0 ? size.width :
+				(int)(size.width / 8) * 8);
+		int h = (size.height % 8 == 0 ? size.height :
+				(int)(size.height / 8) * 8);
+		VideoFormat jpegFormat = new VideoFormat(VideoFormat.JPEG_RTP,
+							 new Dimension(w, h),
+							 Format.NOT_SPECIFIED,
+							 Format.byteArray,
+							 frameRate);
+		tracks[i].setFormat(jpegFormat);
+		System.err.println("Video transmitted as:");
+		System.err.println("  " + jpegFormat);
+		// Assume succesful
+		programmed = true;
+	    } else
+		tracks[i].setEnabled(false);
+	}
+
+	if (!programmed)  return "Couldn't find video track";
+
+	ContentDescriptor cd = new ContentDescriptor(ContentDescriptor.RAW_RTP);
+	processor.setContentDescriptor(cd);
+
+	result = waitForState(processor, Controller.Realized);
+	if (result == false)  return "Couldn't realize processor";
+
+	setJPEGQuality(processor, 0.5f);
+
+
+	dataOutput = processor.getDataOutput();
+
+
+    }catch(Exception e){
+    e.printStackTrace();
+      return e.toString();
+    }
+	return null;
+ }//end createProcessor()
+
+    private String createTransmitter() {
+    try {
+  	  String rtpURL = "rtp://" + ipAddress + ":" + port + "/video";
+	  System.out.println(rtpURL);
+
+          MediaLocator outputLocator = new MediaLocator(rtpURL);
+
+	  rtptransmitter = Manager.createDataSink(dataOutput, outputLocator);
+	  rtptransmitter.open();
+	  rtptransmitter.start();
+	  dataOutput.start();
+     } catch (Exception me) {
+     return "Couldn't create RTP data sink";
+     }
+  return null;
+}//end inner class
+
+    void setJPEGQuality(Player p, float val) {
+	Control cs[] = p.getControls();
+	QualityControl qc = null;
+	VideoFormat jpegFmt = new VideoFormat(VideoFormat.JPEG);
+
+	for (int i = 0; i < cs.length; i++) {
+
+	    if (cs[i] instanceof QualityControl &&
+		cs[i] instanceof Owned) {
+		Object owner = ((Owned)cs[i]).getOwner();
+
+		if (owner instanceof Codec) {
+		    Format fmts[] = ((Codec)owner).getSupportedOutputFormats(null);
+		    for (int j = 0; j < fmts.length; j++) {
+			if (fmts[j].matches(jpegFmt)) {
+			    qc = (QualityControl)cs[i];
+	    		    qc.setQuality(val);
+			    System.err.println("- Setting quality to " +
+					val + " on " + qc);
+			    break;
+			}
+		    }
+		}
+		if (qc != null)
+		    break;
+	    }
+	}
+    }
+
+
+    private Integer stateLock = new Integer(0);
+    private boolean failed = false;
+
+    Integer getStateLock() {
+	return stateLock;
+    }
+
+    void setFailed() {
+	failed = true;
+    }
+
+    private synchronized boolean waitForState(Processor p, int state) {
+	p.addControllerListener(new StateListener());
+	failed = false;
+
+	// Call the required method on the processor
+	if (state == Processor.Configured) {
+	    p.configure();
+	} else if (state == Processor.Realized) {
+	    p.realize();
+	}
+
+	while (p.getState() < state && !failed) {
+	    synchronized (getStateLock()) {
+		try {
+		    getStateLock().wait();
+		} catch (InterruptedException ie) {
+		    return false;
+		}
+	    }
+	}
+
+	if (failed)
+	    return false;
+	else
+	    return true;
+    }
+
+    class StateListener implements ControllerListener {
+
+	public void controllerUpdate(ControllerEvent ce) {
+	    if (ce instanceof ControllerClosedEvent)
+		setFailed();
+
+	    if (ce instanceof ControllerEvent) {
+		synchronized (getStateLock()) {
+		    getStateLock().notifyAll();
+		}//end block
+             }//end if
+           }//end method
+	}//end inner class
+   }//end most inner class
+
+  public static void main(String arg[]){
+   new   CloneTransmissionFrame();
+  }
+}//end class
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+<html>
+<head>
+<script language=JavaScript>
+function createDoc()
+  {
+  var doc=document.open("text/html","replace");
+  var txt="<html><body>Learning about the HTML DOM is fun!</body></html>";
+  doc.write(txt);
+  doc.close();
+  }
+</script>
+</head>
+
+
+
+<body>
+<input type="button" value="New document" onclick="createDoc()" />
+</body>
+</html>

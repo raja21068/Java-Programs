@@ -1,0 +1,188 @@
+/***************************************** 
+ * Author: IU Office of Creative Services
+ *
+ * CSS for screen delivery
+ * 
+ * The function of this stylesheet is to 
+ * control the layout and formatting of 
+ * the branding bar and footer.
+ * 
+ * Except for the exceptions stated in 
+ * the README.txt document, none of the 
+ * styles in this document should be 
+ * modified.
+ * 
+ * At the end of this document are 
+ * commented (i.e.: optional) styles that
+ * you can enable to further control the
+ * appearance of the IUB branding bar and
+ * footer.
+ ****************************************/
+ 
+ 
+/****************************************
+ * General Formatting
+ ****************************************/
+
+
+/****************************************
+ * Skip Navigation Container
+ ****************************************/
+
+#skipnav {
+	left: -9999em;
+	position: absolute;
+	top: -9999em;
+}
+#skipnav hr {
+	display: none;
+}
+
+/****************************************
+ * Branding Bar
+ ****************************************/
+#identity {
+	background-color: #edeff0;
+	color: #fff;
+	font-size: 0.7em; /* 10px */
+	height: 90px;
+	line-height: 1em; /* 10px */
+	width: 100%;
+
+}
+#identity a {
+	color: #fff;
+	text-decoration: underline;
+	
+}
+#identity hr {
+	display: none;
+}
+#identity #signature {
+	height: 125px;
+	margin: 0 auto;
+	position: relative;
+	text-align: left;
+	width: 900px;
+}
+#hiast_name{
+	position: relative;	
+	top: 15px;
+}
+
+#identity #signature a.iub img {
+	display: none;
+}
+
+
+#identity form {
+	height: 44px;
+	position: absolute;
+	right: 0;
+	top: 40px;
+}
+#identity fieldset {
+	border: none;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+/* Fieldset 1 */
+
+#identity fieldset#set1{
+	left: 0;
+	position: relative;
+	top: 17px;
+	color: #4863A0;
+}
+
+#hello_box {
+	right: 0;
+	position: absolute;
+	top: 40px;
+	color: #4863A0;
+}
+
+#hello_box a{
+	color: #4863A0;
+}
+
+#login_form{
+    margin-left: auto;
+    margin-right: auto;
+    width: 15em
+}
+
+#identity ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#identity li {
+	float: left;
+	margin: 0 10px 0 0; 
+}
+#identity a {
+	text-decoration:none;
+}
+#identity a:hover {
+	text-decoration:underline;
+}
+#identity input#search1, #identity input#search2 {
+	left: 0;
+	float: left;
+	height: 13px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	top: -2px;
+	width: 13px;
+}
+
+/* Fieldset 2 */
+
+#identity fieldset#set2 {
+	left: 2px;
+	position: relative;
+	top: 27px;
+}
+#identity #searchtxt {
+	border: 1px solid #c59d9a;
+	color: #616364;
+	float: left;
+	font-size: 1em; /* 10px */
+	height: 1.500em; /* 15px */
+	line-height: 1.100em; /* 11px */
+	margin: 0 6px 0 0;
+	min-height: 13px;
+	padding: 2px 4px 0 4px;
+	width: 9.300em; /* 93px */
+}
+#identity #go {
+	margin: 1px 0 0 0;
+}
+
+#footer {
+	width:890px;
+	background-color:#fff;
+	border-top: 6px solid #edeff0;
+	padding:15px 0 20px 10px;
+	text-align:left;
+	font-size:75%;
+	line-height: 1.2em;
+	color:#333;
+	}
+#footer img#blockIU {
+	padding: 0 7px 3px 10px;
+	float:left;
+	border:none;
+	}
+#footer a {
+	color:#700;
+	text-decoration:none;
+	}
+#footer a:hover {
+	color:#900;
+	text-decoration:underline;
+	}

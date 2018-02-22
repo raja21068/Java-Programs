@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<title>Tutorial: Send And Receive SMS Using GSM Modem</title>
+<meta name="description" content="Testech handles GSM/SMS/GPRS/RF/WIFI projects, develop and provide complete solutions for Wireless Remote Monitoring and Alert applications.">
+<meta name="Keywords" content="Testech, M2M, M2M technology, M2M rtu, SMS, remote control, sms remote monitoring, monitoring system, rtu, remote terminal unit, wireless solution, rtos, arm rtos, real time operating system, single board computer, embedded computer, ice jtag, c++ compiler, c++ program, c programming">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="Tutorial%20%20Send%20And%20Receive%20SMS%20Using%20GSM%20Modem_files/mainstyle.htm">
+<link rel="stylesheet" type="text/css" href="Tutorial%20%20Send%20And%20Receive%20SMS%20Using%20GSM%20Modem_files/navMenu_002.htm">
+<script language="JavaScript" type="text/javascript" src="Tutorial%20%20Send%20And%20Receive%20SMS%20Using%20GSM%20Modem_files/navMenu.htm"></script>
+<script language="JavaScript" type="text/javascript" src="Tutorial%20%20Send%20And%20Receive%20SMS%20Using%20GSM%20Modem_files/framebreak.htm"></script>
+</head>
+
+
+<body onload="breakout_of_frame()">
+<img src="Tutorial%20%20Send%20And%20Receive%20SMS%20Using%20GSM%20Modem_files/testech_logo.jpg" border="0" height="60" width="185"><p><b>Tutorial: How to Send and 
+Receive SMS using GSM Modem</b></p>
+<hr>
+<p><b>Introduction</b></p>
+<p>It is very easy to incorporate SMS capability to any PC or Embedded 
+Controller using Serial Port and any of your favourite programing language (C,C#,Basic,Pascal). 
+Enfora GSM Modem provide a standard API set for communicating with Modem and 
+setup for send and receive SMS. To understand and try out the varioius AT 
+Command to send and receive SMS so that you can incorporate these into your own 
+software project you will need a serial port (WINXP has built in hyperterminal 
+or else for vista you can download third party serial terminal program from 
+web). PC that does not have any serial Commport can buy standard off the shelves 
+USB to serial converter from any computer peripheral shops (such as ATEN 
+UC-232A)</p>
+<p><b>Equipment Needed</b></p>
+<p>A PC with serial comm Port (or a USB to Serial Adaptor)</p>
+<p>A Serial Terminal Program (in this case, we had chosen to use the free 
+Hypterminal that is present on WIN9x/WINXP)</p>
+<p><b>Setting Up Hypterminal</b></p>
+<p align="LEFT">1) Run Start -&gt; All Program -&gt; Accessories -&gt; Communication -&gt; 
+Hypterminal</p>
+<p align="LEFT">2) In a dialog Box, it ask for a connection name. Just type a 
+description (for example T115K). Select a Comport where the COMx is the 
+communication port that the Enfora GSM Modem is physcically conneted to. </p>
+<p align="LEFT">Click OK</p>
+<p align="LEFT"><img src="Tutorial%20%20Send%20And%20Receive%20SMS%20Using%20GSM%20Modem_files/hypterminal_port.jpg" border="0" height="423" width="344"></p>
+<b>
+</b><p align="LEFT"><b>3) </b>Next in the configure button, click on it to set up the 
+comport property. Set up the COMport for 115.2Kbps, 8 Databit, No Parity, 1 stop 
+bit and Non Flow Control (or Hardware Flow Control). Apply and Save.&nbsp; Pls 
+note that if you install a USB to serial ComPort Adaptor, typically the COMPORT 
+will be in a different COMx Number. Make sure that you select the correct COMx 
+Number, and also ensure the USB to Serial Port Aaptor is always connected to the 
+same comport that you installed the driver initially.</p>
+<font size="2">
+<p align="LEFT"><img src="Tutorial%20%20Send%20And%20Receive%20SMS%20Using%20GSM%20Modem_files/hypterminal_comport_property.jpg" border="0" height="407" width="344"></p>
+</font>
+<p align="LEFT"><b>4) </b>Now click on the icon to connect the ComPort by using 
+the Connect.</p>
+<p align="LEFT"><img src="Tutorial%20%20Send%20And%20Receive%20SMS%20Using%20GSM%20Modem_files/hyperterminal_connect.jpg" border="0" height="27" width="53">&nbsp;&nbsp;
+</p>
+<p align="LEFT">5) Now folllowing the following steps by typing on the 
+Hypterminal.</p>
+<p align="LEFT"><font face="Times New Roman,Times New Roman" size="2">1). Type
+</font><font size="2"><b>AT </b></font>
+<font face="Times New Roman,Times New Roman" size="2">and press </font>
+<font size="2"><b>&lt;ENTER&gt; </b></font>
+<font face="Times New Roman,Times New Roman" size="2">the modem should respond 
+with </font><font size="2"><b>OK</b></font><font face="Times New Roman,Times New Roman" size="2">. 
+This will verify that you are communicating with the modem. If you cannot see 
+characters entered on the screen, enter </font>
+<font face="Times New Roman,Times New Roman" size="2"><b>ATE1V1</b>. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><p align="LEFT"><font face="Times New Roman,Times New Roman" size="2">&nbsp;2). The following examples provide the AT commands and 
+responses for setting modem parameters. For more information about the commands 
+and response codes, see the </font>
+<font face="Times New Roman,Times New Roman" size="2"><i><b>GSM0107AT001 – 
+Enfora Enabler IIG AT Command Set</b></i>. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><p align="LEFT"><font face="Times New Roman,Times New Roman" size="2">3).&nbsp; Please refer to </font>
+<font face="Times New Roman,Times New Roman" size="2"><b>Application Note 
+GSM0000AN005 - Enabler-G Automated Network Connection Configuration and Use</b>, 
+to set the appropriate network connection. </font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">4).&nbsp; To be able to send SMS text messages, the Enfora 
+Enabler-G module must be initialized with the proper SMS mode. The following 
+examples provide the AT commands and responses for initializing the SMS mode.
+</p>
+</font><font face="Arial,Arial" size="2"></font><font size="2"></font>
+<font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">5)&nbsp; The following command initializes the Enfora Enabler-G 
+module by setting the text mode parameters. </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CSMP=17,167,0,0 </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Set text mode parameters:
+</font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">AT+CSMP=&lt;fo&gt;,&lt;vp&gt;,&lt;pid&gt;,&lt;dcs&gt; </p>
+</font><font face="Times New Roman,Times New Roman" size="2"><b>
+</b><p align="LEFT"><b>&lt;fo&gt;=17 </b>Sets reply pat, user data header, status report 
+request, validity period format, reject duplicates and message type. </p>
+</font><font face="Times New Roman,Times New Roman" size="2"><b>
+</b><p align="LEFT"><b>&lt;vp&gt;=167 </b>Sets validity period. </p>
+</font><font face="Times New Roman,Times New Roman" size="2"><b>
+</b><p align="LEFT"><b>&lt;pid&gt;=0 </b>Higher layer protocol indicator. </p>
+</font><font face="Times New Roman,Times New Roman" size="2"><b>
+</b><p align="LEFT"><b>&lt;dcs&gt;=0 </b>Information encode format. </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>OK </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Modem Response. </font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">6). After initializing the module with the proper SMS mode, 
+query the module for the correct service center. The service center is required 
+fro proper routing of an SMS through the network. The service center is 
+programmed into the SIM by the network service provider. The following command 
+queries the service center. </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CSCA? </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Query service center. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>+CSCA: "+12063130004" </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Modem Response. (VoiceStream 
+– USA) </font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">7). If no service center is entered, then contact your service 
+provider for correct service center. To enter the correct service center, enter 
+the following command: </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CSCA="+12063130004" </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Sets the service center. (VoiceStream 
+– USA) </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>OK </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Modem Response. </font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT"></p>
+<p align="LEFT">8). The following command selects TEXT mode for SMS messages.
+</p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CMGF=1 </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Set message format to TEXT 
+mode. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>OK </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Modem Response. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font face="Arial,Arial" size="2"></font><font size="2"></font>
+<font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">9). The following command sets the indicators for receiving an 
+SMS message. </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CNMI=1,1,0,0,0 </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Set the new message 
+indicators. </font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">AT+CNMI=&lt;mode&gt;,&lt;mt&gt;,&lt;bm&gt;,&lt;ds&gt;,&lt;bfr&gt; </p>
+</font><font face="Times New Roman,Times New Roman" size="2"><b>
+</b><p align="LEFT"><b>&lt;mode&gt;=1 </b>discard unsolicited result codes indication when TA 
+– TE link is reserved. </p>
+</font><font face="Times New Roman,Times New Roman" size="2"><b>
+</b><p align="LEFT"><b>&lt;mt&gt;=1 </b>SMS-DELIVERs are delivered to the SIM and routed 
+using unsolicited code. </p>
+</font><font face="Times New Roman,Times New Roman" size="2"><b>
+</b><p align="LEFT"><b>&lt;bm&gt;=0 </b>no CBM indications are routed to the TE. </p>
+</font><font face="Times New Roman,Times New Roman" size="2"><b>
+</b><p align="LEFT"><b>&lt;ds&gt;=0 </b>no SMS-STATUS-REPORTs are routed. </p>
+</font><font face="Times New Roman,Times New Roman" size="2"><b>
+</b><p align="LEFT"><b>&lt;bfr&gt;=0 </b>TA buffer of unsolicited result codes defined within 
+this command is flushed to the TE. </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>OK </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Modem Response. </font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">10). The following command saves the SMS settings. Once the SMS 
+commands have been saved, the initialization commands do not need to be sent 
+again until they are changed. </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CSAS </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Save SMS settings. This 
+may take up to 10 seconds. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>OK </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Modem Response. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><p align="LEFT"><font face="Times New Roman,Times New Roman" size="2">11)&nbsp; For more advanced SMS options, see the </font>
+<font face="Times New Roman,Times New Roman" size="2"><i><b>GSM0107AT001 – 
+Enfora Enabler IIG AT Command Set </b></i>for the following AT commands: </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CSCS </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Character set. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CSMS </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Select message service.
+</font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CPMS </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Preferred storage. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CSDH </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Show text mode parameters.
+</font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">12) . After the Enfora Enabler-G module has been initialized, 
+the following commands demonstrate the transmission of an SMS message to a GSM 
+mobile number. </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CMGS="12017572673" </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Send a message to the 
+telephone number. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>&gt; </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Ready to enter a message.
+</font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="1"><b>
+</b></font><p align="LEFT"><font size="1"><b>This is a test message^Z </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Enter the text message. 
+End the message with Control Z. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>+CMGS: 1 </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Successful transmission. 
+The number will increment with each SMS sent. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>OK </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Modem Response. </font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">13) . For an incoming SMS with the above initialization 
+settings, the following indication will be displayed over the serial port: </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>+CMTI: "SM",1 </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Incoming message 
+indication stored in message location 1. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font face="Arial,Arial" size="2">
+<p>GSM0000AN004 Page 3 </p>
+</font><font size="2"></font>
+<font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">14). To read the above message, enter the following: </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CMGR=1 </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Read SMS message in SIM 
+location 1. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><b><font size="2">
+<p align="LEFT">+CMGR: 1,"REC READ","12145551212",,"02/08/01,14:24:41+08", 
+145,4,0,0,"12063130004",145,5 </p>
+</font><font size="1">
+<p align="LEFT">This is a test message </p>
+</font><font size="2">
+</font></b><p align="LEFT"><b><font size="2">OK </font></b>
+<font face="Times New Roman,Times New Roman" size="2">Modem response. See </font>
+<font face="Times New Roman,Times New Roman" size="2"><i><b>GSM0107AT001 – 
+Enfora Enabler IIG AT Command Set </b></i>for parameter details. </font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">15) To store an SMS message on the SIM for later retrieval, 
+enter the following: </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CMGW="12017572673" </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Store a message on the SIM.
+</font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>&gt; </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Ready to enter a message.
+</font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="1"><b>
+</b></font><p align="LEFT"><font size="1"><b>This is a stored message^Z </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Enter the text message. 
+End the message with Control Z. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>+CMGW: 2 </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Successfully stored in 
+memory location 2. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>OK </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Modem Response. </font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">16). To send a message previously stored on the SIM, enter the 
+following: </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CMSS=2 </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Send message from memory 
+location 2. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>+CMSS:2 </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Successful transmission. 
+The number will increment with each SMS sent. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>OK </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Modem Response. </font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">17)&nbsp; To list all of the messages stored on the SIM, enter 
+the following: </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CMGL="ALL" </b></font>
+<font face="Times New Roman,Times New Roman" size="2">List messages on the SIM.
+</font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><b><font size="2">
+</font><p align="LEFT"><font size="2">+CMGL: 1,"REC 
+UNREAD","12145551212",,"02/08/01,14:24:41+08",145,5 </font><font size="1">This 
+is a test message </font></p><font size="1">
+</font><font size="2">
+<p align="LEFT">+CMGL: 2,"STO SENT","17192326602",,,129,22 </p>
+<p align="LEFT">This is a stored message </p>
+</font></b><p align="LEFT"><b><font size="2">OK </font></b>
+<font face="Times New Roman,Times New Roman" size="2">Modem response. See <i><b>&nbsp;Enfora 
+Enabler IIG AT Command Set </b></i>for parameter details. </font></p><font face="Times New Roman,Times New Roman" size="2">
+<p align="LEFT">18). The following command deletes a message from the SIM 
+location specified. </p>
+</font><font size="2"><b>
+</b></font><p align="LEFT"><font size="2"><b>AT+CMGD=1 </b></font>
+<font face="Times New Roman,Times New Roman" size="2">Delete SMS message in SIM 
+location 1. </font></p><font face="Times New Roman,Times New Roman" size="2">
+</font><font size="2"><b>
+</b></font><p><font size="2"><b>OK </b></font><font face="Times New Roman,Times New Roman" size="2">Modem 
+response upon successful delete. </font></p>
+<p><font face="Times New Roman,Times New Roman" size="2">Link:
+<a target="_self" href="http://www.testech-elect.com/enfora/enfora_doc.htm">Documentation and AT Command Set for 
+Enfora GSM Modem</a></font></p>
+<hr>
+<p>&nbsp;<!-----------------------------------------------------------------------------           Content      Box        -----------------------------------------------------------------------------></p>
+<o:p><!--webbot bot="Include" U-Include="enfora_footer.htm" TAG="BODY" startspan -->
+
+<p><font size="2">&nbsp; <a target="_top" href="http://www.testech-elect.com/enfora/index.htm">Back to Enfora Main Page</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;
+<a target="_top" href="http://www.testech-elect.com/index.htm">Back to Testech Home Page</a>&nbsp;&nbsp;&nbsp; 
+|&nbsp;&nbsp;&nbsp; <a target="_top" href="http://www.testech-elect.com/wireless.htm">Wireless Modules </a> <a target="_top" href="http://www.testech-elect.com/icompiler.htm">&nbsp; </a>&nbsp; </font> 
+</p>
+
+<!--webbot bot="Include" i-checksum="16645" endspan --><!---------------------------------------------------------------------------------           Navigation     Menu      ---------------------------------------------------------------------------------></o:p></body></html>

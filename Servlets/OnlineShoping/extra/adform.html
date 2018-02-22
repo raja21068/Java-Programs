@@ -1,0 +1,221 @@
+<html>
+	<head>
+	<style>
+		
+	</style>
+	</head>
+	
+	<body>
+		<form enctype='multipart/form-data'  action='servlet/OnlineShopping' method=post>
+			
+			<input type='hidden' name='identify' value='add'/>
+			
+			Company Make
+			<select name='company' size=1>
+				<option value=''>No Answer</option>
+				<option value='suzuki'>Suzuki</option>
+				<option value='toyota'>Toyaota</option>
+				<option value='bmw'>BMW</option>
+				<option value='honda'>Honda</option>
+			</select>
+			<br />
+			
+			Vehical Name
+			<input type='text' name='vehicalName' required='required'/>
+			<br />
+			
+			Vehical Type
+			<select name='vehicaltype' size=1>
+				<option value=''>No Answer</option>
+				<option value='bike'>Bike</option>
+				<option value='car'>Car</option>
+				<option value='jeep'>Jeep</option>
+				<option value='tractor'>Tractor</option>
+				<option value='truck'>Truck</option>
+			</select>
+			<br />
+			
+			Model Year
+			<select name='modelyear' size=1>
+				<option value=''>No Answer</option>
+				<option value='1970'>1970</option>
+				<option value='1971'>1971</option>
+				<option value='1972'>1972</option>
+				<option value='1973'>1973</option>
+				<option value='1974'>1974</option>
+				<option value='1975'>1975</option>
+				<option value='1976'>1976</option>
+				<option value='1977'>1977</option>
+				<option value='1978'>1978</option>
+				<option value='1979'>1979</option>
+				<option value='1980'>1980</option>
+				<option value='1981'>1981</option>
+				<option value='1982'>1982</option>
+				<option value='1983'>1983</option>
+				<option value='1984'>1984</option>
+				<option value='1985'>1985</option>
+				<option value='1986'>1986</option>
+				<option value='1987'>1987</option>
+				<option value='1988'>1988</option>
+				<option value='1989'>1989</option>
+				<option value='1990'>1990</option>
+				<option value='1991'>1991</option>
+				<option value='1992'>1992</option>
+				<option value='1993'>1993</option>
+				<option value='1994'>1994</option>
+				<option value='1995'>1995</option>
+				<option value='1996'>1996</option>
+				<option value='1997'>1997</option>
+				<option value='1998'>1998</option>
+				<option value='1999'>1999</option>
+				<option value='2000'>2000</option>
+				<option value='2001'>2001</option>
+				<option value='2002'>2002</option>
+				<option value='2003'>2003</option>
+				<option value='2004'>2004</option>
+				<option value='2005'>2005</option>
+				<option value='2006'>2006</option>
+				<option value='2007'>2007</option>
+				<option value='2008'>2008</option>
+				<option value='2009'>2009</option>
+				<option value='2010'>2010</option>
+				<option value='2011'>2011</option>
+				<option value='2012'>2012</option>
+				<option value='2013'>2013</option>
+			</select><br />
+			
+			Color
+			<select name='color' size=1>
+				<option value=''>No Answer</option>
+				<option value='red'>Red</option>
+				<option value='white'>White</option>
+				<option value='black'>Black</option>
+				<option value='brown'>Brown</option>
+			</select>
+			
+			<br />
+			Registered Year
+			<select name='registeryear' size=1>
+				<option value=''>No Answer</option>
+				<option value='1970'>1970</option>
+				<option value='1971'>1971</option>
+				<option value='1972'>1972</option>
+				<option value='1973'>1973</option>
+				<option value='1974'>1974</option>
+				<option value='1975'>1975</option>
+				<option value='1976'>1976</option>
+				<option value='1977'>1977</option>
+				<option value='1978'>1978</option>
+				<option value='1979'>1979</option>
+				<option value='1980'>1980</option>
+				<option value='1981'>1981</option>
+				<option value='1982'>1982</option>
+				<option value='1983'>1983</option>
+				<option value='1984'>1984</option>
+				<option value='1985'>1985</option>
+				<option value='1986'>1986</option>
+				<option value='1987'>1987</option>
+				<option value='1988'>1988</option>
+				<option value='1989'>1989</option>
+				<option value='1990'>1990</option>
+				<option value='1991'>1991</option>
+				<option value='1992'>1992</option>
+				<option value='1993'>1993</option>
+				<option value='1994'>1994</option>
+				<option value='1995'>1995</option>
+				<option value='1996'>1996</option>
+				<option value='1997'>1997</option>
+				<option value='1998'>1998</option>
+				<option value='1999'>1999</option>
+				<option value='2000'>2000</option>
+				<option value='2001'>2001</option>
+				<option value='2002'>2002</option>
+				<option value='2003'>2003</option>
+				<option value='2004'>2004</option>
+				<option value='2005'>2005</option>
+				<option value='2006'>2006</option>
+				<option value='2007'>2007</option>
+				<option value='2008'>2008</option>
+				<option value='2009'>2009</option>
+				<option value='2010'>2010</option>
+				<option value='2011'>2011</option>
+				<option value='2012'>2012</option>
+				<option value='2013'>2013</option>
+			</select>
+			
+			<br />
+			
+			Registeration City
+			<input type='text' name='registercity' required='required' />
+			<br />
+			
+			Demand Price:
+			<input type='text' name='price' required='required' />Rs
+			<br />
+			
+			AC
+			<select name='ac' size=1>
+				<option value=''>No Answer</option>
+				<option value='yes'>Yes</option>
+				<option value='no'>No</option>
+			</select><br /> 
+			
+			Fule Type
+			<select name='fule' size=1>
+				<option value=''>No Answer</option>
+				<option value='petrol'>Petrol</option>
+				<option value='cng'>CNG</option>
+				<option value='petrolcng'>Petrol+CNG</option>
+				<option value='dieselcng'>Diesel+CNG</option>
+				<option value='deisel'>Diesel</option>
+			</select><br /> 
+			
+			PowerWindow
+			<select name='powerwindow' size=1>
+				<option value=''>No Answer</option>
+				<option value='yes'>Yes</option>
+				<option value='no'>No</option>
+			</select><br /> 
+			
+			Transmission
+			<select name='transmission' size=1>
+				<option value=''>No Answer</option>
+				<option value='auto'>auto</option>
+				<option value='normal'>normal</option>
+			</select><br /> 
+			
+			Condition
+			<select name='condition' size=1>
+				<option value=''>No Answer</option>
+				<option value='new'>New</option>
+				<option value='used'>Used</option>
+			</select><br /> 
+
+			
+			Mileage
+			<input type='text' name='mileage' /> 
+			<br />
+			
+			Door Count
+			<select name='doors'>
+				<option name=''>No answer</option>
+				<option name='2'>2-door</option>
+				<option name='4'>4-door</option>
+			</select><br /> 
+			
+			
+			Remarks
+			<input type='text' name='remarks' required='required' /><br />
+			
+			<br />
+			
+
+			Pictures
+			<input type='file' name='dataFile' id='fileChooser'  multiple='multiple'/>
+			<br />
+			
+			<input type='submit' value='Upload' />
+			
+		</form>
+	</body>
+</html>

@@ -1,0 +1,4 @@
+@Help
+This is management software..
+
+*Move the arrow at the right border the bar will be apear.

@@ -1,0 +1,3 @@
+javac PasswordBuilder.java
+java PasswordBuilder
+pause

@@ -1,0 +1,2 @@
+javac Addition.java
+pause

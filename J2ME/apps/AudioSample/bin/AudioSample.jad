@@ -1,0 +1,8 @@
+MIDlet-1: AudioSample, AudioSample.png, Midlet
+MIDlet-Jar-Size: 100
+MIDlet-Jar-URL: AudioSample.jar
+MIDlet-Name: AudioSample
+MIDlet-Vendor: Unknown
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.1

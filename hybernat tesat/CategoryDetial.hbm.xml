@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+      <hibernate-mapping>
+          <class name="CategoryDetial" table="CATEGORY_DETIAL">
+               <meta attribute="class-description">
+               </meta>
+               <id name="catDetailId" type="int" column="cat_detail_id">
+                     <generator class="native"/>
+               </id>
+               <property name="catId" column="cat_id" type="int"/>
+               <property name="bookName" column="book_name" type="string"/>
+               <property name="publisher" column="publisher" type="string"/>
+               <property name="authir" column="Authir" type="string"/>
+               <property name="edition" column="Edition" type="string"/>
+               <property name="volume" column="Volume" type="string"/>
+               <property name="yearOfPublishing" column="year_of_publishing" type="string"/>
+               <property name="isbn" column="isbn" type="string"/>
+               <property name="accessNo" column="access_no" type="string"/>
+               <property name="drasNo" column="Dras_no" type="string"/>
+               <property name="prise" column="prise" type="int"/>
+               <property name="purchaseFrom" column="purchase_from" type="string"/>
+               <property name="dateOfPurchase" column="date_of_purchase" type="string"/>
+               <property name="remarks" column="remarks" type="string"/>
+
+           </class>
+      </hibernate-mapping>

@@ -1,0 +1,14 @@
+copy the file api of servlet 
+
+ source = " c:/Tomcat/lib/servlet-api.jar "
+ destination = " c:/java/jre/lib/ext/servlet-api.jar"
+
+ move the 'TestServlet' in " c:/tomcat/webapps/root/web-inf/classes/TestServlet.java"
+
+ " c:/tomcat/webapps/root/web-inf/classes/javac TestServlet.java " 	
+  
+ if it compile without any error it means the api is working..
+
+---> Now start the tomcat server
+---> open the browser
+---> http://localhost:8080/servlet/TestServlet 

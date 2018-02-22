@@ -1,0 +1,54 @@
+package clonevideoreceiving;
+
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import javax.media.protocol.DataSource;
+import javax.media.Manager;
+import javax.media.MediaLocator;
+/**
+ * Title:        Clone Video Receing System
+ * Description:  This Program will receies simultanously videos from different locations
+ * Copyright:    Copyright (c) 2005
+ * Company:      IIT, University of Sindh, Jamshoro
+ * @author Sachal Joyo
+ * @version 1.0
+ */
+
+public class MediaRecieverServer extends Thread{
+  private static DataSource ds;
+
+  public void run(){
+   try{
+        ServerSocket server=new ServerSocket(9000);
+
+        do{
+            Socket socket=server.accept();
+
+            DataInputStream input=new DataInputStream(socket.getInputStream());
+            DataOutputStream Output=new DataOutputStream(socket.getOutputStream());
+
+            String header=input.readLine();
+            StringTokenizer tokens=new StringTokenizer(header,"[]");
+
+            String mediaPort=tokens.nextToken();
+            String isClone=tokens.nextToken();
+
+            String ipAddress=socket.getInetAddress().getHostAddress();
+
+            String destinationURL = "rtp://" + ipAddress + ":" + mediaPort + "/video";
+            System.out.println(destinationURL);
+
+            MediaLocator mediaLocator=new MediaLocator(destinationURL);
+
+            ds = Manager.createDataSource(mediaLocator);
+            MyMediaPlayer myMediaPlayer = new MyMediaPlayer();
+  	    if (!myMediaPlayer.open(ds))System.out.println("Can not create cloninggggg");
+
+         }while(true);
+
+   }catch(Exception e){
+     e.printStackTrace();
+   }
+  }//end run()
+}//end class

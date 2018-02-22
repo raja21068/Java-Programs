@@ -1,0 +1,40 @@
+import java.awt.*;
+import java.awt.event.*;
+
+class Click extends Frame implements MouseListener{
+
+Click(){
+setBounds(0,0,300,300);
+addMouseListener(this);
+show();
+}
+public void mouseEntered(MouseEvent e){
+setBackground(Color.green);
+Label lb=new Label("Entered");
+lb.setBounds(100,100,100,25);
+}
+public void mouseExited(MouseEvent e){
+setBackground(Color.red);
+Label lb=new Label("Exited");
+lb.setBounds(100,100,100,25);
+}
+public void mouseClicked(MouseEvent e){
+setBackground(Color.yello);
+Label lb=new Label("Clicked");
+lb.setBounds(100,100,100,25);
+}
+public void mousePressed(MouseEvent e){
+setBackground(Color.green);
+Label lb=new Label("Entered");
+lb.setBounds(100,100,100,25);
+}
+public void mouseReleased(MouseEvent e){
+setBackground(Color.green);
+Label lb=new Label("released");
+lb.setBounds(100,100,100,25);
+}
+public static void main(String arg[]){
+Click i=new Click();
+}
+}
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 29, 2013 9:01:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="bean.Transaction" table="transaction" catalog="suresh_shop">
+        <id name="transactionId" type="java.lang.Integer">
+            <column name="TRANSACTION_ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="day" class="bean.Day" fetch="select">
+            <column name="DAY_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="account" class="bean.Account" fetch="select">
+            <column name="ACCOUNT_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="product" class="bean.Product" fetch="select">
+            <column name="PRODUCT_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="salePurchase" class="bean.SalePurchase" fetch="select">
+            <column name="SALE_PURCHASE_ID" not-null="true" />
+        </many-to-one>
+        <property name="quantity" type="double">
+            <column name="QUANTITY" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="amount" type="double">
+            <column name="AMOUNT" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="type" type="int">
+            <column name="TYPE" not-null="true" />
+        </property>
+        <property name="productOriginalRate" type="java.lang.Double">
+            <column name="PRODUCT_ORIGINAL_RATE" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

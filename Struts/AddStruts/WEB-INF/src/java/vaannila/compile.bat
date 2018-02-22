@@ -1,0 +1,2 @@
+javac HelloWorld.java
+pause

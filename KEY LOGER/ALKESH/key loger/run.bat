@@ -1,0 +1,3 @@
+javac jnatest.java
+java jnatest
+pause...

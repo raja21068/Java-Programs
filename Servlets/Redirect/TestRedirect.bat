@@ -1,0 +1,2 @@
+javac TestRedirect.java
+pause

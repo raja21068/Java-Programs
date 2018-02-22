@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+   version="2.5">
+
+  <!-- At a minimum, real apps need servlet and servlet-mapping entries
+       for any servlets used. Use of the invoker servlet 
+       (http://hostName/appName/servlet/package.ServletClass) is for testing
+       and learning only. For details on configuration and use with Eclipse,
+       please see http://www.coreservlets.com/Apache-Tomcat-Tutorial/
+  -->
+  
+
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+
+
+<servlet>
+    <init-param>
+            <param-name>address</param-name>
+            <param-value>Hyderabd</param-value>
+    </init-param>
+    <servlet-name>Authentication</servlet-name>
+    <servlet-class>Authentication</servlet-class>
+    
+  </servlet>
+ 
+ <servlet-mapping>
+    <servlet-name>Authentication</servlet-name>
+    <url-pattern>/Authentication</url-pattern>  
+</servlet-mapping>
+  
+</web-app>

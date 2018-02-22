@@ -1,0 +1,3 @@
+javac AudioRecorder02.java
+java AudioRecorder02
+pause

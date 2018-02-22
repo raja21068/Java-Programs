@@ -1,0 +1,7 @@
+Date:18/03/2005
+
+This program sucessfully Transmiting video to destination clients
+on the Transmitter side we r using cloning technique.....
+
+
+test.avi file must be exists in d:\jdk1.4\bin\test.avi

@@ -1,0 +1,163 @@
+step No:1
+---------
+c:\java\bin>edit HelloInterface.java
+
+import java.rmi.*;
+
+public interface HelloInterface extends Remote{
+  String sayHello()throws RemoteException;
+}
+
+
+c:\java\bin>javac HelloInterface.java
+
+
+step No:2
+---------
+c:\java\bin>edit HelloServer.java
+
+import java.rmi.*;
+import java.rmi.server.*;
+import java.util.*;
+
+public class HelloServer extends UnicastRemoteObject implements 
+					  	      HelloInterface{
+        public HelloServer()throws RemoteException{
+	        //Call super class constructor to export this object   
+		super();	   	
+	}
+
+	public String sayHello()throws RemoteException{
+	  return "Hello World, the current system time is "+ new Date();
+	}   
+
+}
+
+
+c:\java\bin>javac HelloServer.java
+c:\java\bin>rmic -v1.2 HelloServer
+
+
+step No:3
+---------
+c:\java\bin>edit HelloClient.java
+
+import java.rmi.*;
+
+public class HelloClient{
+ public HelloClient(){
+     try{
+          HelloInterface obj=(HelloInterface)Naming.lookup("rmi://localhost:1099/HelloService");          
+	  String message=obj.sayHello();
+	  System.out.println(message);
+     }catch(Exception e){
+       e.printStackTrace();        
+     }   
+ }
+
+}
+c:\java\bin>javac HelloClient.java
+
+step No:4
+---------
+c:\java\bin>edit sachal.policy
+
+grant{
+     permission java.security.AllPermission;
+ };
+
+
+step No:5
+---------
+start rmiregistry -J-Djava.security.policy=sachal.policy
+
+
+
+
+step No:6
+---------
+start web server in this example I use tomcat , plz click following file to start webserver.
+
+d:\tomcat\bin\startup.bat
+
+step No:7
+---------
+
+c:\java\bin>move HelloClient.* d:\tomcat\webapps\root
+c:\java\bin>move HelloServer.* d:\tomcat\webapps\root
+c:\java\bin>move HelloInterface.* d:\tomcat\webapps\root
+c:\java\bin>move HelloServer_stub.* d:\tomcat\webapps\root
+
+
+step No:8
+---------
+c:\java\bin>edit DynamicServer.java
+
+import java.rmi.*;
+import java.rmi.server.*;
+import java.util.*;
+
+public class DynamicServer{
+  public static void main(String arg[]){
+
+   if(System.getSecurityManager()==null)
+   System.setSecurityManager(new RMISecurityManager());
+
+
+   Properties p=System.getProperties();
+   String url=p.getProperty("java.rmi.server.codebase");
+
+   try{
+        Class server=RMIClassLoader.loadClass(url,"HelloServer");
+        Naming.rebind("rmi://localhost:1099/HelloService",(Remote)server.newInstance());
+        System.out.println("HelloServer bound in registry");
+  }catch(Exception e){
+    e.printStackTrace();
+  }	
+
+  }  
+}
+
+c:\java\bin>javac DynamicServer.java
+
+
+step No:9
+---------
+c:\java\bin>java -Djava.security.policy=sachal.policy -Djava.rmi.server.codebase=http://localhost:8080/ DynamicServer
+
+
+
+step No:10
+---------
+c:\java\bin>edit DynamicClient.java
+
+import java.rmi.*;
+import java.rmi.server.*;
+import java.util.*;
+
+public class DynamicClient{
+ public static void main(String arg[]){
+
+  if(System.getSecurityManager()==null)
+    System.setSecurityManager(new RMISecurityManager());
+
+    Properties p=System.getProperties();
+    String url=p.getProperty("java.rmi.server.codebase");
+
+    try{
+          Class client=RMIClassLoader.loadClass(url,"HelloClient");
+          client.newInstance();
+     }catch(Exception e){
+       e.printStackTrace();        
+     }   
+ }
+
+}
+
+c:\java\bin>javac DynamicClient.java
+c:\java\bin>java -Djava.security.policy=sachal.policy -Djava.rmi.server.codebase=http://localhost:8080/ DynamicClient
+
+
+
+who is says that copy-paste pattern is bad......
+I m very much happy..

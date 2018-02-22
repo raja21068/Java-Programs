@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+      <hibernate-mapping>
+          <class name="Category" table="CATEGORY">
+               <meta attribute="class-description">
+               </meta>
+               <id name="catId" type="int" column="cat_id">
+                     <generator class="native"/>
+               </id>
+               <property name="catName" column="cat_name" type="string"/>
+               <property name="remarks" column="Remarks" type="string"/>
+
+           </class>
+      </hibernate-mapping>

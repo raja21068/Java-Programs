@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+      <hibernate-mapping>
+          <class name="Program" table="PROGRAM">
+               <meta attribute="class-description">
+               </meta>
+               <id name="progId" type="int" column="prog_id">
+                     <generator class="native"/>
+               </id>
+               <property name="deptId" column="dept_id" type="int"/>
+               <property name="progName" column="prog_name" type="string"/>
+               <property name="duration" column="duration" type="int"/>
+               <property name="remarks" column="remarks" type="string"/>
+
+           </class>
+      </hibernate-mapping>

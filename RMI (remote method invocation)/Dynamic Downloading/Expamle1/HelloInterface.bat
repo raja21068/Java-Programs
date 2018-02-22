@@ -1,0 +1,2 @@
+javac HelloInterface.java
+pause..

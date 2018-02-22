@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 29, 2013 9:01:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="bean.SalePurchase" table="sale_purchase" catalog="suresh_shop">
+        <id name="salePurchaseId" type="java.lang.Integer">
+            <column name="SALE_PURCHASE_ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="day" class="bean.Day" fetch="select">
+            <column name="DAY_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="account" class="bean.Account" fetch="select">
+            <column name="ACCOUNT_ID" not-null="true" />
+        </many-to-one>
+        <property name="totalAmount" type="double">
+            <column name="TOTAL_AMOUNT" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="type" type="int">
+            <column name="TYPE" not-null="true" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="REMARKS" length="100" not-null="true" />
+        </property>
+        <property name="paidAmount" type="double">
+            <column name="PAID_AMOUNT" precision="22" scale="0" not-null="true" />
+        </property>
+        <set name="cheques" inverse="true">
+            <key>
+                <column name="SALE_PURCHASE_ID" not-null="true" />
+            </key>
+            <one-to-many class="bean.Cheque" />
+        </set>
+        <set name="transactions" inverse="true">
+            <key>
+                <column name="SALE_PURCHASE_ID" not-null="true" />
+            </key>
+            <one-to-many class="bean.Transaction" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,40 @@
+#phonic { display: none; }
+#shape { display: none; }
+#phonelist { display: none; }
+#fontgrid { display: none; }
+#rarestuff { display:none; }
+#alphabet { display: block; }
+
+
+form#buttonform { margin: 0; padding: 0; border: 0;  line-height: normal; }
+dt { color: #FF6600; }
+
+
+/* #consonants { border: 2px dotted #005a9c; } */
+#consonants td {  padding: 0;  white-space: nowrap; }
+#zwspcol { padding-left: 10px; padding-right: 10px; width: 28px; }
+
+#alphabet { padding-left: 5px; padding-right: 5px; }
+#mainconsonants { width: 380px; }
+#consonants td { padding-left: 5px; }
+#combining { border-collapse:collapse; margin-top: 10px; margin-bottom: 10px; width: 320px; padding:5px; border-top: dotted 1px teal; }
+#combining td { padding-right: 10px; }
+#chillus { width: 40px; }
+#rarestuff { padding-left:20px; width: 280px; }
+#formatchars { width: 30px; }
+#vowels { width: 180px; }
+
+#phonic, #phonic2 { padding-left: 5px; padding-right: 5px; font-size: 15px; font-family: "Doulos SIL", sans-serif; }
+#phonic span, #phonic2 span { cursor:pointer; }
+.phonicspaces { padding-left: 10px; padding-right: 10px; width: 28px; }
+.uaplosives { white-space: nowrap; }
+.aspiratedplosives { white-space: nowrap; }
+.kbd td { vertical-align: top; }
+.vowels{ padding: 5px; margin-bottom: 5px; width: 750px; }
+
+.shapelist li { 
+	line-height: 36px;
+	}
+
+
+#output { line-height: 100px; padding-right: 10px; }

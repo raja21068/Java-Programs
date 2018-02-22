@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+      <hibernate-mapping>
+          <class name="Student" table="STUDENT">
+               <meta attribute="class-description">
+               </meta>
+               <id name="studentId" type="int" column="student_id">
+                     <generator class="native"/>
+               </id>
+               <property name="batchID" column="Batch_ID" type="int"/>
+               <property name="studentName" column="student_name" type="string"/>
+               <property name="fName" column="FName" type="string"/>
+               <property name="surname" column="Surname" type="string"/>
+               <property name="cNIC" column="CNIC" type="string"/>
+               <property name="rollNo" column="Roll_No" type="string"/>
+               <property name="cellNo" column="cell_no" type="string"/>
+               <property name="group" column="Group" type="int"/>
+               <property name="shift" column="Shift" type="int"/>
+               <property name="address" column="Address" type="string"/>
+               <property name="remarks" column="Remarks" type="string"/>
+
+           </class>
+      </hibernate-mapping>

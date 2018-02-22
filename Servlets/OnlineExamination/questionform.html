@@ -1,0 +1,25 @@
+<html>
+	<form action='ExaminationServlet'>
+	<input type='hidden' name='identify' value='addquestion'>
+	<table>
+			<tr>
+				<td>Question</td>
+				<td><input type='text' name='question' required='required'></td>
+			</tr>
+			
+			<tr>
+				<td>Remarks</td>
+				<td><input type='text' name='remarks'></td>
+			</tr>
+			
+			<tr>
+				<td colspan=2><input type='submit' value='Add Question'></td>
+			</tr>
+	</table>
+	</form>
+	
+	<form action='ExaminationServlet'>
+	<input type='hidden' name='identify' value='showallquestions'>
+	<input type='submit' value='back'>
+	</form>
+<html>

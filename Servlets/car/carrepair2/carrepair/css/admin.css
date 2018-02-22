@@ -1,0 +1,84 @@
+﻿a{
+	color: white;
+	text-decoration: none;
+	font-size: 20px;
+	}
+
+a:hover{
+	text-decoration: underline;
+}
+h1{
+	color: white;
+}
+body {
+	background-image: url('../images/background.jpg');
+	margin: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#login {
+	background-image: url('../images/login.jpg');
+	background-repeat: no-repeat;
+	width: 333px;
+	height: 317px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+	padding: 30px 10px 10px 10px;
+}
+#signup{
+	background-repeat: no-repeat;
+	width: 400px;
+	height: 400px;
+	margin-top:	  3%;
+}
+#signup-btn{
+	
+	color: #525266;
+	font-size: 20px;
+}
+.input {
+	background-image: url('../images/input-bg.jpg');
+	height: 47px;
+	width: 260px;
+	border: 1px solid #8a8a8a;
+	margin-bottom: 20px;
+	font-size: 20pt;
+	color: #ffffff;
+	line-height: 47px;
+	padding-left: 4px;
+}
+#content {
+	margin-left: auto;
+	margin-right: auto;
+	width: 293px;
+}
+.login-info {
+	font-size: 10px;
+	font-weight: bold;
+	color: #ffffff;
+	line-height: 25px;
+	letter-spacing: 2px;
+}
+.checkbox {
+	float: left;
+}
+.rememberme {
+	line-height: 20px;
+	font-size: 8pt;
+	color: #ffffff;
+	float: left;
+}
+#forgot-password {
+	text-align: right;
+	padding-right: 25px;
+}
+#forgot-password a {
+	color: #ffffff;
+	font-size: 8pt;
+	line-height: 20px;
+}
+#login-buttton {
+	text-align: right;
+	padding-right: 25px;
+	padding-top: 10px;
+}

@@ -1,0 +1,119 @@
+//* make a remote interface
+Step1:  c:/java/bin> edit MyRemoteInterface.java
+-------
+import java.rmi.*;
+
+public interface MyRemoteInterface extends Remote{
+	public Object callMeRemotely()throws RemoteException;
+
+}
+
+
+Step2:   c:/java/bin> javac MyRemoteInterface.java
+------
+
+
+//* make a implementer class that implements the remote interface
+   instead of extending UnicastRemoteObject we extends the 
+   class with activatable.
+Step3:  c:/java/bin> edit ActivatableImplementation.java
+-------
+import java.rmi.*;
+import java.rmi.activation.*;
+public class ActivatableImplementation extends Activatable implements MyRemoteInterface{
+	public ActivatableImplementation(ActivationID id  , MarshalledObject data)throws RemoteException{
+		super(id,0);
+
+	}
+	public Object callMeRemotely()throws RemoteException{
+		return "Success";
+	}
+}
+
+Step4: c:/java/bin> javac ActivatableImplementation.java
+------ 
+       c:/java/bin> rmic ActivatableImplementation
+
+
+
+//* making security policies
+Step5:  c:/java/bin> edit sachal.policy
+-------
+grant{
+	permission java.security.AllPermission;
+};
+
+
+
+Step6:  c:/java/bin> edit Setup.java
+-------
+
+import java.rmi.*;
+import java.rmi.activation.*;
+import java.util.Properties;
+
+public class Setup{
+	public static void main(String args[])throws Exception{
+		System.setSecurityManager(new RMISecurityManager());
+
+		Properties props = new Properties();
+		props.put("java.security.policy","Sachal.policy");
+		
+		ActivationGroupDesc.CommandEnvironment ace = null;
+		
+		ActivationGroupDesc exampleGroup = new ActivationGroupDesc(props , ace);		
+		
+		ActivationGroupID agi = ActivationGroup.getSystem().registerGroup(exampleGroup);
+		
+
+		String location = "file://E:/Java/jdk1.7.0/bin";
+		MarshalledObject data = null;
+		
+		ActivationDesc desc = new ActivationDesc(agi , "ActivatableImplementation" , location , data);
+		
+		MyRemoteInterface mri = (MyRemoteInterface)Activatable.register(desc);
+		System.out.println("Got the stub for the ActivatableImplementation");
+		Naming.rebind("ActivatableImplementation" , mri);
+		System.out.println("Exported ActivatableImplementation");
+		System.exit(0); 
+	}
+
+}
+
+
+
+Step7:  c:/java/bin> javac Setup.java
+-------
+        c:/java/bin> start rmiregistry
+	c:/java/bin> start rmid -J-Djava.security.policy=sachal.policy
+
+
+
+Step8:  c:/java/bin> edit Client.java
+-------
+
+import java.rmi.*;
+
+public class Client{
+	public static void main(String args[]){
+		String server = "localhost";
+		//System.setSecurityManager(new RMISecurityManager());
+		try{
+			String location = "rmi://"+server+":1099/ActivatableImplementation";
+			MyRemoteInterface mri = (MyRemoteInterface)Naming.lookup(location);
+			String result = "failure";
+			System.out.println("Making remote calll to the server");
+			result = (String)mri.callMeRemotely();
+			System.out.println("Returned from remote call");
+			System.out.println("Result: "+result);
+			
+		}catch(Exception ex){ex.printStackTrace();}
+	}
+}
+
+Step9:  c:/java/bin> javac Client.java
+-------
+	c:/java/bin> java Client
+
+//* it is too easy to run
+    but too difficult to understand...*//

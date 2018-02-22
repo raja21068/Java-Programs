@@ -1,0 +1,65 @@
+<html>
+	<head>
+	<script>
+		function checkPass(e1,e2){
+			if(e1.value!=e2.value){
+				e2.setCustomValidity("Password Incorrect");
+			}
+		}
+	</script>
+	<style>
+		
+		ul{
+			background-color: purple;
+			padding-top: 10px;
+			padding-botton: 10px;
+		}
+		li{
+			display: inline;
+			padding-right: 10px;
+		}
+		li > a{
+			color: white;
+			text-decoration: none;
+		}
+	</style>
+	</head>
+	<body>
+	<img src='/OnlineShoping/images/logo.jpg' width=30% height=10%> 
+			<ul>
+				<li><a href='car.html'>Home</a></li>
+				<li><a href=''>About</a></li>
+			</ul>
+	<form enctype="multipart/form-data" action='servlet/OnlineShopping' method='post' >
+	<h1 align='center'>Sign Up</h1>
+	<input type='hidden' name='identify' value='signup' />
+	First Name
+	<input type='text' name='FIRSTNAME' required='required' /><br />
+	Last Name
+	<input type='text' name='LASTNAME' required='required' /><br />
+	Email
+	<input type='email' name='EMAIL' required='required' /><br />
+	UserName
+	<input type='text' name='USERNAME' required='required' /><br />
+	Password
+	<input type='password' name='PASSWORD' id='pass' required='required' /><br />
+	Retype-Password
+	<input type='password' name='PASSWORD' required='required' oninput="checkPass(document.getElementById('pass'),this);" /><br />
+	Address
+	<input type='text' name='ADDRESS' required='required' /><br />
+	Contact No
+	<input type='text' name='CONTACT' required='required' /><br />
+	City
+	<input type='text' name='CITY' required='required' /><br />
+	State
+	<input type='text' name='STATE' required='required' /><br />
+	Country
+	<select name='COUNTRY'>
+		<option>Pakistan</option>
+	</select>
+	
+	<input type='submit' value='SignUp' />
+	
+	</form>
+	</body>
+</html>

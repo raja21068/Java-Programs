@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 29, 2013 9:01:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="bean.Cheque" table="cheque" catalog="suresh_shop">
+        <id name="chequeId" type="java.lang.Integer">
+            <column name="CHEQUE_ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="account" class="bean.Account" fetch="select">
+            <column name="ACCOUNT_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="salePurchase" class="bean.SalePurchase" fetch="select">
+            <column name="SALE_PURCHASE_ID" not-null="true" />
+        </many-to-one>
+        <property name="chequeNumber" type="string">
+            <column name="CHEQUE_NUMBER" length="45" not-null="true" />
+        </property>
+        <property name="chequeDate" type="date">
+            <column name="CHEQUE_DATE" length="10" not-null="true" />
+        </property>
+        <property name="givenDate" type="date">
+            <column name="GIVEN_DATE" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,8 @@
+MIDlet-1: SpriteExample, SpriteExample.png, ExampleGameSpriteMidlet
+MIDlet-Jar-Size: 100
+MIDlet-Jar-URL: SpriteExample.jar
+MIDlet-Name: SpriteExample
+MIDlet-Vendor: Unknown
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.1

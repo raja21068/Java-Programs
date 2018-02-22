@@ -1,0 +1,30 @@
+<html>
+	<form action='ExaminationServlet' >
+		<input type='hidden' name='identify' value='optionsave'>
+		<table border=1>
+		<tr>
+		<td>Option</td>
+		<td><input type='text' name='optionname' required='required'></td>
+		</tr>
+		
+		<tr>
+		<td>Remarks</td>
+		<td><input type='text' name='remarks'></td>
+		</tr>
+		
+		<tr>
+		<td>Correct</td>
+		<td><input type='checkbox' name='correct'></td>
+		</tr>
+		
+		<tr>
+		<td colspan=2><input type='submit' value='Save'></td>
+		</tr>
+		</table>
+	</form>
+	
+	<form action='ExaminationServlet'>
+	<input type='hidden' name='identify' value='showallquestions'>
+	<input type='Submit' value='back'>	
+	</form>
+</html>

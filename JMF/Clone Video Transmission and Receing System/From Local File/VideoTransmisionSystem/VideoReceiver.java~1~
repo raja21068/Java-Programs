@@ -1,0 +1,68 @@
+
+// The java media packages
+import javax.media.*;
+import javax.media.util.BufferToImage;
+import javax.media.util.ImageToBuffer;
+import javax.media.format.*;
+import javax.media.protocol.*;
+import javax.media.bean.playerbean.*;
+import javax.media.control.*;
+
+import com.sun.media.util.JMFI18N;
+
+
+// Java platform packages
+import java.lang.reflect.Method;
+import java.awt.*;
+import java.awt.event.*;
+import java.net.*;
+import java.io.*;
+import java.util.*;
+
+
+public class VideoReceiver extends Frame implements ControllerListener{
+
+    private Player player;
+
+    public VideoReceiver(String mediaLocation){
+        this.setLayout(null);
+        MediaPlayer bean =new MediaPlayer();    
+        bean.setMediaLocator( new MediaLocator(mediaLocation) );
+
+        player=bean.getPlayer();
+        player.addControllerListener(this);
+        player.realize();
+    }//end constructor....
+
+  public synchronized void controllerUpdate(ControllerEvent event)
+    {
+
+        if (event instanceof RealizeCompleteEvent){
+
+            Component visualComponent =player.getVisualComponent();//movi component
+
+            visualComponent.setBounds(100,100,300,300);
+            this.add(visualComponent);
+
+            Component controlComponent = player.getControlPanelComponent();
+            controlComponent.setBounds(100,410 ,300, 25);
+            this.add(controlComponent);
+
+            player.prefetch();//controller posts a PrefetchCompleteEvent
+  	}
+       else
+         if (event instanceof PrefetchCompleteEvent) player.start();
+   
+   
+   }//end method....
+
+    public static void main(String [] args) {
+            String mediaLocation = "rtp://pc07:9000/video";              
+            VideoReceiver video = new VideoReceiver(mediaLocation);
+          video.show();
+    }//END main() method.
+
+
+}//end class
+
+

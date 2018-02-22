@@ -1,0 +1,556 @@
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Stack;
+
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
+import javax.swing.Icon;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.TreeModelListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.plaf.ActionMapUIResource;
+import javax.swing.tree.DefaultTreeSelectionModel;
+import javax.swing.tree.TreeCellRenderer;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
+
+    public class FileTreeDemo {
+    public static void main(String[] args) {
+    try{                                              
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }catch(Exception e){
+    System.out.println("cant done"); 
+    }
+    // Create a JTree and tell it to display our model
+    JTree tree = new JTree();
+
+    // The JTree can get big, so allow it to scroll
+    JScrollPane scrollpane = new JScrollPane(tree);
+    // Figure out where in the filesystem to start displaying       
+    File[] roots = File.listRoots();  
+    FileTreeModel model = new FileTreeModel(null); 
+    model = new FileTreeModel(roots[0]);
+    tree.setModel(model);
+   // TreeCellRenderer checkTreeManager=new TreeCellRenderer(tree);
+    CheckTreeManager checkTreeManager = new CheckTreeManager(tree); 
+    TreePath checkedPaths[]=checkTreeManager.getSelectionModel().getSelectionPaths();
+    int j = checkedPaths.length;
+    System.out.println("Tree Path :"+j);
+    for(int i=0; i<checkedPaths.length;i++){
+    System.out.println("Tree Path :"+checkedPaths[i]);
+    }
+    // Display it all in a window and make the window appear
+    JFrame frame = new JFrame("FileTreeDemo");
+    frame.getContentPane().add(scrollpane, "Center");
+    frame.setSize(400,600);
+    frame.setVisible(true);
+    }  
+    }
+
+    class FileTreeModel  extends DefaultTreeSelectionModel implements TreeModel{
+    // We specify the root directory when we create the model.
+
+    protected File root;
+    public FileTreeModel(File root) { this.root = root; 
+    //setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION); 
+    }
+
+    // The model knows how to return the root object of the tree
+    public Object getRoot() { return root; }
+
+    // Tell JTree whether an object in the tree is a leaf
+    public boolean isLeaf(Object node) {  return ((File)node).isFile(); }
+
+    // Tell JTree how many children a node has
+    public int getChildCount(Object parent) {
+    String[] children = ((File)parent).list();
+    if (children == null) return 0;
+    return children.length;
+    }
+
+    // Fetch any numbered child of a node for the JTree.
+    // Our model returns File objects for all nodes in the tree.  The
+    // JTree displays these by calling the File.toString() method.
+    public Object getChild(Object parent, int index) {
+    String[] children = ((File)parent).list();
+    if ((children == null) || (index >= children.length)) return null;
+    return new File((File) parent, children[index]);
+    }
+
+    // Figure out a child's position in its parent node.
+    public int getIndexOfChild(Object parent, Object child) {
+    String[] children = ((File)parent).list();
+    if (children == null) return -1;
+    String childname = ((File)child).getName();
+    for(int i = 0; i < children.length; i++) {
+    if (childname.equals(children[i])) return i;
+    }
+     return -1;
+    }
+
+    // This method is invoked by the JTree only for editable trees.  
+    // This TreeModel does not allow editing, so we do not implement 
+    // this method.  The JTree editable property is false by default.
+    public void valueForPathChanged(TreePath path, Object newvalue) {}
+
+    // Since this is not an editable tree model, we never fire any events,
+    // so we don't actually have to keep track of interested listeners*/
+    public void addTreeModelListener(TreeModelListener l) {}
+    public void removeTreeModelListener(TreeModelListener l) {}
+    }
+
+
+ 
+    /**
+    * Maintenance tip - There were some tricks to getting this code
+    * working:
+    *
+    * 1. You have to overwite addMouseListener() to do nothing
+    * 2. You have to add a mouse event on mousePressed by calling
+    * super.addMouseListener()
+    * 3. You have to replace the UIActionMap for the keyboard event
+    * "pressed" with your own one.
+    * 4. You have to remove the UIActionMap for the keyboard event
+    * "released".
+    * 5. You have to grab focus when the next state is entered,
+    * otherwise clicking on the component won't get the focus.
+    * 6. You have to make a TristateDecorator as a button model that
+    * wraps the original button model and does state management.
+    */
+  class TristateCheckBox extends JCheckBox{
+    private final TristateDecorator model;
+
+    public TristateCheckBox(String text, Icon icon, Boolean initial){
+    super(text, icon);
+    // Add a listener for when the mouse is pressed
+    super.addMouseListener(new MouseAdapter(){
+    public void mousePressed(MouseEvent e){
+    grabFocus();
+    model.nextState();
+    }});
+
+
+
+    class CheckTreeCellRenderer extends JPanel implements TreeCellRenderer{ 
+    private CheckTreeSelectionModel selectionModel; 
+    private TreeCellRenderer delegate; 
+    private TristateCheckBox checkBox = new TristateCheckBox(); 
+    public CheckTreeCellRenderer(TreeCellRenderer delegate, CheckTreeSelectionModel selectionModel){ 
+    this.delegate = delegate; 
+    this.selectionModel = selectionModel; 
+    setLayout(new BorderLayout()); 
+    setOpaque(false); 
+    checkBox.setOpaque(false); 
+    } 
+
+
+    public Component getTreeCellRendererComponent(JTree tree, Object value, boolean  selected, boolean expanded, boolean leaf, int row, boolean hasFocus){ 
+    Component renderer = delegate.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);  
+    TreePath path = tree.getPathForRow(row); 
+    if(path!=null){ 
+    if(selectionModel.isPathSelected(path, true)) 
+    checkBox.setState(Boolean.TRUE); 
+    else 
+    checkBox.setState(selectionModel.isPartiallySelected(path) ? null : Boolean.FALSE); 
+    } 
+    removeAll(); 
+    add(checkBox, BorderLayout.WEST); 
+    add(renderer, BorderLayout.CENTER); 
+    return this; 
+    //TODO has to be written//![enter image description here][1]
+    } 
+    }
+    // Reset the keyboard action map
+    ActionMap map = new ActionMapUIResource();
+    map.put("pressed", new AbstractAction(){      //NOI18N
+    public void actionPerformed(ActionEvent e){
+    grabFocus();
+    model.nextState();
+    }
+    });
+    map.put("released", null);                     //NOI18N
+    SwingUtilities.replaceUIActionMap(this, map);
+    // set the model to the adapted model
+    model = new TristateDecorator(getModel());
+    setModel(model);
+    setState(initial);
+    }
+
+    public TristateCheckBox(String text, Boolean initial){
+    this(text, null, initial);
+    }
+
+    public TristateCheckBox(String text){
+    this(text, null);
+    }
+
+    public TristateCheckBox(){
+    this(null);
+    }
+
+    /** No one may add mouse listeners, not even Swing! */
+    public void addMouseListener(MouseListener l){}
+
+    /**
+    * Set the new state to either SELECTED, NOT_SELECTED or
+    * DONT_CARE.  If state == null, it is treated as DONT_CARE.
+    */
+    public void setState(Boolean state){
+    model.setState(state);
+    }
+
+    /** Return the current state, which is determined by the
+    * selection status of the model. */
+    public Boolean getState(){
+    return model.getState();
+    }
+
+    /**
+    * Exactly which Design Pattern is this?  Is it an Adapter,
+    * a Proxy or a Decorator?  In this case, my vote lies with the
+    * Decorator, because we are extending functionality and
+    * "decorating" the original model with a more powerful model.
+    */
+    private class TristateDecorator implements ButtonModel{
+    private final ButtonModel other;
+    private TristateDecorator(ButtonModel other){
+    this.other = other;
+    }
+
+    private void setState(Boolean state){
+    if(state==Boolean.FALSE){
+    other.setArmed(false);
+    setPressed(false);
+    setSelected(false);
+    } else if(state==Boolean.TRUE){
+    other.setArmed(false);
+    setPressed(false);
+    setSelected(true);
+    }
+    else{
+    other.setArmed(true);
+    setPressed(true);
+    setSelected(true);
+    }
+    }
+
+    /**
+    * The current state is embedded in the selection / armed
+    * state of the model.
+    *
+    * We return the SELECTED state when the checkbox is selected
+    * but not armed, DONT_CARE state when the checkbox is
+    * selected and armed (grey) and NOT_SELECTED when the
+    * checkbox is deselected.
+    */
+    private Boolean getState(){
+    if(isSelected() && !isArmed()){
+    // normal black tick
+    return Boolean.TRUE;
+    } else if(isSelected() && isArmed()){
+    // don't care grey tick
+    return null;
+    } else{
+    // normal deselected
+    return Boolean.FALSE;
+    }
+    }
+
+    /** We rotate between NOT_SELECTED, SELECTED and DONT_CARE.*/
+    private void nextState(){
+    Boolean current = getState();
+    if(current == Boolean.FALSE){
+    setState(Boolean.TRUE);
+    } else if(current == Boolean.TRUE){
+    setState(null);
+    } else if(current == null){
+    setState(Boolean.FALSE);
+    }
+    }
+
+    /** Filter: No one may change the armed status except us. */
+    public void setArmed(boolean b){
+    }
+    public boolean isFocusTraversable() {
+    return isEnabled();
+    }
+
+    /** We disable focusing on the component when it is not
+    * enabled. */
+    public void setEnabled(boolean b){
+    //            setFocusable(b);
+    other.setEnabled(b);
+    }
+
+
+    /** All these methods simply delegate to the "other" model
+    * that is being decorated. */
+    public boolean isArmed(){return other.isArmed();
+    }
+    public boolean isSelected(){return other.isSelected();
+    }
+    public boolean isEnabled(){return other.isEnabled();
+    }
+    public boolean isPressed(){return other.isPressed();
+    }
+    public boolean isRollover(){return other.isRollover();
+    }
+    public void setSelected(boolean b){other.setSelected(b);
+    }
+    public void setPressed(boolean b){other.setPressed(b);
+    }
+    public void setRollover(boolean b){other.setRollover(b);
+    }
+    public void setMnemonic(int key){other.setMnemonic(key);
+    }
+    public int getMnemonic(){return other.getMnemonic();
+    }
+    public void setActionCommand(String s){other.setActionCommand(s);
+    }
+    public String getActionCommand(){return other.getActionCommand();
+    }
+    public void setGroup(ButtonGroup group){other.setGroup(group);
+    }
+    public void addActionListener(ActionListener l){other.addActionListener(l);
+    }
+    public void removeActionListener(ActionListener l){other.removeActionListener(l);
+    }
+    public void addItemListener(ItemListener l){other.addItemListener(l);
+    }
+    public void removeItemListener(ItemListener l){other.removeItemListener(l);
+    }
+    public void addChangeListener(ChangeListener l){other.addChangeListener(l);
+    }
+    public void removeChangeListener(ChangeListener l){other.removeChangeListener(l);
+    }
+    public Object[] getSelectedObjects(){return other.getSelectedObjects();
+    }
+    }
+
+    public class CheckTreeManager extends MouseAdapter implements TreeSelectionListener{ 
+    private CheckTreeSelectionModel selectionModel; 
+    private JTree tree = new JTree(); 
+    int hotspot = new JCheckBox().getPreferredSize().width; 
+
+    public CheckTreeManager(JTree tree){ 
+    this.tree = tree; 
+    selectionModel = new CheckTreeSelectionModel(tree.getModel()); 
+    tree.setCellRenderer(new CheckTreeCellRenderer(tree.getCellRenderer(), selectionModel)); 
+    tree.addMouseListener(this); 
+    selectionModel.addTreeSelectionListener(this); 
+    } 
+
+    public void mouseClicked(MouseEvent me){ 
+    TreePath path = tree.getPathForLocation(me.getX(), me.getY()); 
+    if(path==null) 
+    return; 
+    if(me.getX()>tree.getPathBounds(path).x+hotspot) 
+    return; 
+
+    boolean selected = selectionModel.isPathSelected(path, true); 
+    selectionModel.removeTreeSelectionListener(this); 
+
+    try{ 
+    if(selected) 
+    selectionModel.removeSelectionPath(path); 
+    else 
+    selectionModel.addSelectionPath(path); 
+    System.out.println("Tree Path :"+path);
+    } finally{ 
+        selectionModel.addTreeSelectionListener(this); 
+        tree.treeDidChange(); 
+    } 
+    } 
+
+    public CheckTreeSelectionModel getSelectionModel(){return selectionModel; 
+    } 
+    public void valueChanged(TreeSelectionEvent e){tree.treeDidChange(); 
+    }
+} 
+
+
+
+    public static void main(String args[]) throws Exception{
+    UIManager.setLookAndFeel(
+            UIManager.getSystemLookAndFeelClassName());
+    JFrame frame = new JFrame("TristateCheckBoxTest");     //NOI18N
+    frame.getContentPane().setLayout(new GridLayout(0, 1, 5, 5));
+    final TristateCheckBox swingBox = new TristateCheckBox("Testing the tristate checkbox");  //NOI18N
+    swingBox.setMnemonic('T');
+    frame.getContentPane().add(swingBox);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.pack();
+    frame.setVisible(true);
+    }
+    }
+
+
+   class CheckTreeSelectionModel extends DefaultTreeSelectionModel{ 
+    private TreeModel model; 
+//FileTreeModel model;
+
+    public CheckTreeSelectionModel(TreeModel model){ 
+    this.model = model; 
+    setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION); 
+    } 
+
+    // tests whether there is any unselected node in the subtree of given path 
+    public boolean isPartiallySelected(TreePath path){ 
+    if(isPathSelected(path, true)) 
+        return false; 
+    TreePath[] selectionPaths = getSelectionPaths(); 
+    if(selectionPaths==null) 
+    return false; 
+    for(int j = 0; j<selectionPaths.length; j++){ 
+    if(isDescendant(selectionPaths[j], path)) 
+    return true; 
+    } 
+    return false; 
+    } 
+
+    // tells whether given path is selected. 
+    // if dig is true, then a path is assumed to be selected, if 
+    // one of its ancestor is selected. 
+    public boolean isPathSelected(TreePath path, boolean dig){ 
+    if(!dig) 
+       return super.isPathSelected(path); 
+    while(path!=null && !super.isPathSelected(path)) 
+    path = path.getParentPath(); 
+    return path!=null; 
+    } 
+
+    // is path1 descendant of path2 
+    private boolean isDescendant(TreePath path1, TreePath path2){ 
+    Object obj1[] = path1.getPath(); 
+    Object obj2[] = path2.getPath(); 
+    for(int i = 0; i<obj2.length; i++){ 
+    if(obj1[i]!=obj2[i]) 
+    return false; 
+    } 
+    return true; 
+    } 
+
+    public void setSelectionPaths(TreePath[] pPaths){ 
+    throw new UnsupportedOperationException("not implemented yet!!!"); 
+    } 
+
+    public void addSelectionPaths(TreePath[] paths){ 
+    // unselect all descendants of paths[] 
+    for(int i = 0; i<paths.length; i++){ 
+        TreePath path = paths[i]; 
+        TreePath[] selectionPaths = getSelectionPaths(); 
+        if(selectionPaths==null) 
+            break; 
+        ArrayList toBeRemoved = new ArrayList(); 
+        for(int j = 0; j<selectionPaths.length; j++){ 
+            if(isDescendant(selectionPaths[j], path)) 
+                toBeRemoved.add(selectionPaths[j]); 
+        } 
+        super.removeSelectionPaths((TreePath[])toBeRemoved.toArray(new TreePath[0])); 
+    } 
+
+    // if all siblings are selected then unselect them and select parent recursively 
+    // otherwize just select that path. 
+    for(int i = 0; i<paths.length; i++){ 
+        TreePath path = paths[i]; 
+        TreePath temp = null; 
+        while(areSiblingsSelected(path)){ 
+            temp = path; 
+            if(path.getParentPath()==null) 
+                break; 
+            path = path.getParentPath(); 
+        } 
+        if(temp!=null){ 
+            if(temp.getParentPath()!=null) 
+                addSelectionPath(temp.getParentPath()); 
+            else{ 
+                if(!isSelectionEmpty()) 
+                    removeSelectionPaths(getSelectionPaths()); 
+                super.addSelectionPaths(new TreePath[]{temp}); 
+            } 
+        }else 
+            super.addSelectionPaths(new TreePath[]{ path}); 
+      } 
+    } 
+
+    // tells whether all siblings of given path are selected. 
+     private boolean areSiblingsSelected(TreePath path){ 
+    TreePath parent = path.getParentPath(); 
+    if(parent==null) 
+        return true; 
+    Object node = path.getLastPathComponent(); 
+    Object parentNode = parent.getLastPathComponent(); 
+
+    int childCount = model.getChildCount(parentNode); 
+    for(int i = 0; i<childCount; i++){ 
+        Object childNode = model.getChild(parentNode, i); 
+        if(childNode==node) 
+            continue; 
+        if(!isPathSelected(parent.pathByAddingChild(childNode))) 
+            return false; 
+    } 
+    return true; 
+    } 
+
+    public void removeSelectionPaths(TreePath[] paths){ 
+    for(int i = 0; i<paths.length; i++){ 
+        TreePath path = paths[i]; 
+        if(path.getPathCount()==1) 
+            super.removeSelectionPaths(new TreePath[]{ path}); 
+        else 
+            toggleRemoveSelection(path); 
+    } 
+   } 
+
+   // if any ancestor node of given path is selected then unselect it 
+     //  and selection all its descendants except given path and descendants. 
+    // otherwise just unselect the given path 
+     private void toggleRemoveSelection(TreePath path){ 
+    Stack stack = new Stack(); 
+    TreePath parent = path.getParentPath(); 
+    while(parent!=null && !isPathSelected(parent)){ 
+        stack.push(parent); 
+        parent = parent.getParentPath(); 
+    } 
+    if(parent!=null) 
+        stack.push(parent); 
+    else{ 
+        super.removeSelectionPaths(new TreePath[]{path}); 
+        return; 
+    } 
+
+    while(!stack.isEmpty()){ 
+        TreePath temp = (TreePath)stack.pop(); 
+        TreePath peekPath = stack.isEmpty() ? path : (TreePath)stack.peek(); 
+        Object node = temp.getLastPathComponent(); 
+        Object peekNode = peekPath.getLastPathComponent(); 
+        int childCount = model.getChildCount(node); 
+        for(int i = 0; i<childCount; i++){ 
+            Object childNode = model.getChild(node, i); 
+            if(childNode!=peekNode) 
+                super.addSelectionPaths(new TreePath[]  {temp.pathByAddingChild(childNode)}); 
+       } 
+       } 
+    super.removeSelectionPaths(new TreePath[]{parent}); 
+    } 
+   }

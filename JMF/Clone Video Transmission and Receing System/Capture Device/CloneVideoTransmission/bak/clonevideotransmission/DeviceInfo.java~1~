@@ -1,0 +1,188 @@
+package clonevideotransmission;
+//import java.awt.*;
+import java.net.InetAddress;
+import java.util.*;
+import java.io.*;
+
+import javax.media.*;
+import javax.media.control.*;
+import javax.media.format.*;
+import javax.media.protocol.*;
+import javax.media.rtp.*;
+import javax.media.rtp.rtcp.*;
+import com.sun.media.rtp.*;
+
+
+/**
+ * Title:        Multicast Video Transmission System
+ * Description:  This program will demostrate u to transfer video to multiple clients at the same time
+ * Copyright:    Copyright (c) 2005
+ * Company:      Institute of Information Tecehnology, University Sindh, Jamshoro
+ * @author Sachal Joyo
+ * @version 1.0
+ */
+
+
+
+public class DeviceInfo{
+
+  private static Vector videoCaptureDevicesVector=new Vector();
+  private static Vector audioCaptureDevicesVector=new Vector();
+
+  static{
+     detectCaptureDevicesAndFormats();
+  }//end static block
+
+ private static void detectCaptureDevicesAndFormats(){
+	java.util.Vector deviceListVector = CaptureDeviceManager.getDeviceList(null);
+
+	if (deviceListVector == null){
+	    javax.swing.JOptionPane.showMessageDialog(null,"Error: media device list vector is null, program aborted");
+            return;
+	}//end if
+
+	if (deviceListVector.size() == 0){
+	    javax.swing.JOptionPane.showMessageDialog(null,"Error: media device list vector size is 0, program aborted");
+            return;
+	}//end if
+
+
+	for (int x = 0; x < deviceListVector.size(); x++){
+		// display device name
+		CaptureDeviceInfo device = (CaptureDeviceInfo) deviceListVector.elementAt(x);
+		String deviceName = device.getName();
+
+                DeviceItem videoDeviceItem=new DeviceItem();
+                DeviceItem audioDeviceItem=new DeviceItem();
+
+		// display device formats
+		Format deviceFormat[] = device.getFormats();
+
+                boolean isAudio=false;
+                boolean isVideo=false;
+
+		for (int y = 0; y < deviceFormat.length; y++)
+                {
+			if (deviceFormat[y] instanceof VideoFormat)
+		        {
+                          videoDeviceItem.setDeviceName(deviceName);
+                          videoDeviceItem.addDeviceFormat(new ListItem(deviceFormat[y],DeviceInfo.formatToString(deviceFormat[y])));
+                          isVideo=true;
+                          System.out.println("Video Device:"+deviceName);
+		        }
+
+			if (deviceFormat[y] instanceof AudioFormat)
+                         {
+                           audioDeviceItem.setDeviceName(deviceName);
+                           audioDeviceItem.addDeviceFormat(new ListItem(deviceFormat[y],DeviceInfo.formatToString(deviceFormat[y])));
+                           isAudio=true;
+                           System.out.println("Audio Device:"+deviceName);
+                         }
+          }//inner for loop
+
+     if(isVideo)
+       videoCaptureDevicesVector.addElement(videoDeviceItem);
+
+     if(isAudio)
+       audioCaptureDevicesVector.addElement(audioDeviceItem);
+  }//outer for loop
+}//end detectCaptureDevicesAndFormats()
+
+	public static Format formatMatches (Format format, Format supported[] )
+        {
+		if (supported == null)
+			return null;
+
+		for (int i = 0;  i < supported.length;  i++)
+			if (supported[i].matches(format))
+				return supported[i];
+		return null;
+	}//end formatMatches()
+
+	public static boolean setFormat(DataSource dataSource, Format format)
+        {
+		boolean formatApplied = false;
+
+		FormatControl formatControls[] = null;
+
+		formatControls = ((CaptureDevice) dataSource).getFormatControls();
+		for (int x = 0; x < formatControls.length; x++)
+		{
+			if (formatControls[x] == null)
+				continue;
+
+			Format supportedFormats[] = formatControls[x].getSupportedFormats();
+			if (supportedFormats == null)
+				continue;
+
+			if (DeviceInfo.formatMatches(format, supportedFormats) != null)
+			{
+				formatControls[x].setFormat(format);
+				formatApplied = true;
+			}
+		}
+
+		return formatApplied;
+	}//end setFormat()
+
+
+	public static boolean isVideo(Format format)
+	{
+		return (format instanceof VideoFormat);
+	}//end isVideo()
+
+
+	public static boolean isAudio(Format format)
+	{
+		return (format instanceof AudioFormat);
+	}//end isAudio()
+
+
+	public static String formatToString(Format format)
+	{
+		if (isVideo(format))
+			return videoFormatToString((VideoFormat) format);
+
+		if (isAudio(format))
+			return audioFormatToString((AudioFormat) format);
+
+		return ("--- unknown media device format ---");
+	}//end formatToString()
+
+
+	public static String videoFormatToString(VideoFormat videoFormat)
+	{
+		StringBuffer result = new StringBuffer();
+
+		// add width x height (size)
+		java.awt.Dimension d = videoFormat.getSize();
+		result.append("size=" + (int) d.getWidth() + "x" + (int) d.getHeight() + ", ");
+
+		// add encoding
+		result.append("encoding=" + videoFormat.getEncoding() + ", ");
+
+		// add max data length
+		result.append("maxdatalength=" + videoFormat.getMaxDataLength() + "");
+
+		return result.toString();
+	}//end videoFormatToString()
+
+	public static String audioFormatToString(AudioFormat audioFormat)
+	{
+		StringBuffer result = new StringBuffer();
+
+		// short workaround
+		result.append(audioFormat.toString().toLowerCase());
+
+		return result.toString();
+	}//end audioFormatToString()
+
+
+        public static Vector getVideoCaptureDevices(){
+          return videoCaptureDevicesVector;
+        }//end getVideoCaptureDevice()
+
+        public static Vector getAudioCaptureDevices(){
+            return audioCaptureDevicesVector;
+        }//end getAudioCaptureDevices()
+}//end class

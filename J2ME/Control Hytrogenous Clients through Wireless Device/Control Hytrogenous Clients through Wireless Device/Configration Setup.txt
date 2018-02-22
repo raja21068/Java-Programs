@@ -1,0 +1,47 @@
+for single Pc configration
+--------------------------
+1. you must install jdk1.3
+2. you will install j2me Wireless Toolkit
+3. "Utitlities" folder and Server.java and Client.java you will put in c:\java\bin.
+4. now you will create new project in j2me wirelessToolkit with 'Remote' Name. 
+5. then Remote.java file past in c:\J2meWT\apps\Remote\Src Folder.
+6. then all images that are available inside "picture" folder you can paste int c:\J2meWT\apps\Remote\Res Folder.
+7. compile and run Server.java file for Example
+   c:\java\bin\javac Server.java
+   c:\java\bin\java Server
+
+8. identify the server name from server machine and goto client programe store server name in 'serverIPAddress' variable. for Example String serverIPAddress="Sadia";
+
+9. compile and run Client.java file for Example
+   c:\java\bin\javac Client.java
+   c:\java\bin\java Client
+
+10. compile and run Remote.java file for Example click followng file to start J2meToolkit 
+   c:\J2meWT\bin\ktoolbar.bat
+   Now Open Remote Project
+   make compile and run
+
+
+
+for local Area Network configration
+--------------------------
+1. install in each Pc jdk1.3
+2. now 1st past Server.java File inside c:\java\bin
+3. compile and run Server.java file for Example
+   c:\java\bin\javac Server.java
+   c:\java\bin\java Server
+4. identify the server name from server machine and goto Client.Java And Remote.java programe store server name in 'serverIPAddress' variable. for Example String serverIPAddress="Sadia";
+
+5. now past Client.java And "Utitlities" folder File inside c:\java\bin
+6. compile and run Client.java file for Example
+   c:\java\bin\javac Client.java
+   c:\java\bin\java Client
+
+7. you will install j2me Wireless Toolkit
+8. now you will create new project in j2me wirelessToolkit with 'Remote' Name. 
+9. then Remote.java file past in c:\J2meWT\apps\Remote\Src Folder.
+10. then all images that area available inside picture folder you can past int c:\J2meWT\apps\Remote\Res Folder.
+11. compile and run Remote.java file for Example click followng file to start J2meToolkit 
+   c:\J2meWT\bin\ktoolbar.bat
+   Now Open Remote Project
+   make compile and run

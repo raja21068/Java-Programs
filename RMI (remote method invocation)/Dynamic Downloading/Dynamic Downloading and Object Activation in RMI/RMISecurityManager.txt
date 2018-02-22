@@ -1,0 +1,12 @@
+The RMISecurityManager
+----------------------
+
+the java.rmi.RMISecurityManager extends the java.lang.SecurityManager class
+and provides the security context under which RMI application execute.
+
+if no security manager has been set, stub classes can only be loaded from
+the local classpath and not from the host or code base.
+
+this protect applications from downloading unsecure code using remote method invocations.
+
+ 

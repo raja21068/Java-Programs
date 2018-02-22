@@ -1,0 +1,62 @@
+/***************************************** 
+ * Author: IU Office of Creative Services
+ *
+ * CSS for print delivery
+ *
+ * The purpose of this stylesheet is to 
+ * redefine the layout and formatting of 
+ * the branding bar and footer for 
+ * printing.
+ *****************************************/
+
+
+/****************************************
+ * IU Branding Bar
+ ****************************************/
+ 
+#identity {
+	background-color: #fff;
+	color: #000;
+}
+#identity a {
+	color: #000;
+}
+#identity #signature a.iub {
+	background: none;
+	padding: 0;
+	position: static;
+}
+#identity #signature a.iub img {
+	display: block;
+}
+#identity #signature form {
+	display: none;
+}
+#identity #signature2 a.iub {
+	background: none;
+	padding: 0;
+	position: static;
+}
+#identity #signature2 a.iub img {
+	display: block;
+}
+/****************************************
+ * IU Footer
+ ****************************************/
+
+#footer {
+	background-color: #fff;
+}
+#footer #copyright #blockiu a {
+	background: none;
+}
+#footer #copyright #blockiu a img {
+	display: block;
+}
+#footer #copyright p {
+	color: #000;
+}
+#footer #copyright a {
+	color: #900;
+	text-decoration: underline;
+}

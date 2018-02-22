@@ -1,0 +1,1 @@
+mysqldump -u root -proot suresh_shop -r backup.sql;

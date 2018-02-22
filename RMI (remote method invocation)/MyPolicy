@@ -1,0 +1,8 @@
+/* AUTOMATICALLY GENERATED ON Tue Dec 25 15:57:03 PKT 2012*/
+/* DO NOT EDIT */
+
+grant {
+  permission java.io.FilePermission "<<ALL FILES>>", "read";
+  permission java.net.SocketPermission "192.168.1.1", "listen";
+};
+

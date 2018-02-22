@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+      <hibernate-mapping>
+          <class name="SCRATCHCARD" table="SCRATCH_CARD">
+               <meta attribute="class-description">
+               </meta>
+               <id name="scratchCardId" type="int" column="scratch_card_id">
+                     <generator class="native"/>
+               </id>
+               <property name="facId" column="fac_id" type="int"/>
+               <property name="amount" column="amount" type="int"/>
+               <property name="status" column="status" type="string"/>
+               <property name="cardNo" column="card_no" type="string"/>
+               <property name="purpose" column="purpose" type="string"/>
+               <property name="vaildUpToDate" column="vaild_up_to_date" type="date"/>
+               <property name="remarks" column="remarks" type="string"/>
+
+           </class>
+      </hibernate-mapping>

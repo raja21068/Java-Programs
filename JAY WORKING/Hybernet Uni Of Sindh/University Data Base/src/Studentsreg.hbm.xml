@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+      <hibernate-mapping>
+          <class name="Studentsreg" table="studentsreg">
+               <meta attribute="class-description">
+               </meta>
+               <id name="stdId" type="int" column="std_id">
+                     <generator class="native"/>
+               </id>
+               <property name="batchId" column="batch_id" type="int"/>
+               <property name="name" column="name" type="string"/>
+               <property name="fname" column="fname" type="string"/>
+               <property name="surname" column="surname" type="string"/>
+               <property name="rollNo" column="rollNo" type="int"/>
+
+           </class>
+      </hibernate-mapping>

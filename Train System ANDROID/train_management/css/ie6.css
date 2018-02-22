@@ -1,0 +1,20 @@
+/***************************************** 
+ * Author: IU Office of Creative Services
+ *
+ * CSS for Internet Explorer 6 (IE6)
+ * 
+ * The function of this stylesheet is to 
+ * adjust the layout and formatting of 
+ * the branding bar and footer to 
+ * appear consistently in IE6.
+ ****************************************/
+ 
+#identity ul {
+	margin: 0 -10px 0 0;
+}
+#identity input#search1, #identity input#search2 {
+	margin: 0 -3px 0 0;
+}
+#identity #searchtxt {
+	margin: 0 3px 0 0;
+}

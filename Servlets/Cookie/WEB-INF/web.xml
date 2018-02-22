@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+   version="2.5">
+
+  <!-- At a minimum, real apps need servlet and servlet-mapping entries
+       for any servlets used. Use of the invoker servlet 
+       (http://hostName/appName/servlet/package.ServletClass) is for testing
+       and learning only. For details on configuration and use with Eclipse,
+       please see http://www.coreservlets.com/Apache-Tomcat-Tutorial/
+  -->
+  
+
+  <welcome-file-list>
+    <welcome-file>addbasket.html</welcome-file>
+  </welcome-file-list>
+
+
+<servlet>
+    <description></description>
+    <display-name>AddBasket</display-name>
+    <servlet-name>AddBasket</servlet-name>
+    <servlet-class>AddBasket</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddBasket</servlet-name>
+    <url-pattern>/AddBasket</url-pattern>
+  </servlet-mapping>
+  
+<servlet>
+    <description></description>
+    <display-name>ViewBasket</display-name>
+    <servlet-name>ViewBasket</servlet-name>
+    <servlet-class>ViewBasket</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewBasket</servlet-name>
+    <url-pattern>/ViewBasket</url-pattern>
+  </servlet-mapping>
+
+<servlet>
+    <description></description>
+    <display-name>DestroyBasket</display-name>
+    <servlet-name>DestroyBasket</servlet-name>
+    <servlet-class>DestroyBasket</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DestroyBasket</servlet-name>
+    <url-pattern>/DestroyBasket</url-pattern>
+  </servlet-mapping>
+  
+
+</web-app>

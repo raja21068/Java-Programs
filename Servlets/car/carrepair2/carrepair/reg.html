@@ -1,0 +1,73 @@
+<html>
+<head>
+<link href="css/admin.css" rel="stylesheet" type="text/css" />
+<script>
+function validatePass(p1, p2) {
+    if (p1.value != p2.value || p1.value == '' || p2.value == '') {
+        p2.setCustomValidity('Password incorrect');
+    } else {
+        p2.setCustomValidity('');
+    }
+}
+</script>
+<style>
+
+label{
+	font-size: 15px;
+	font-weight: bold;
+	color: #ffffff;
+	line-height: 25px;
+	letter-spacing: 2px;
+}
+input {
+				font-size:x-large;
+			}
+</style>
+</head>
+<div id="signup">
+<form action=register.php method=post>
+		<table>
+		<tr><td><label>First Name:</td></label>
+		<td><div class="textright"><input type="text" name="name" value="" required="required"  />
+		</div>
+		</td>
+		</tr>
+
+		<tr>
+		<td><label>Last Name</label></td>
+		<td><div class="textright"><input type="text" name="contact" value="" required="required"  />
+		</td>
+		</div>
+		</tr>
+		
+		<tr>
+		<td><label>Your Email</label></td>
+		<td><div class="textright"><input type="email" name="Personal_Email" value="" required="required"  />
+		</div>
+		</td>
+		</tr>
+		
+	
+		
+		<tr>
+		<td><label>Password:</label></td>
+		<td><div class="required">
+            <input type='password' name="pass" id='p1'><br /><br />
+                 
+	    </div></td>
+		</tr>
+		  
+		
+		<tr>
+		<td><label>Cofirm Password:</label></td>
+		<td><div class="textright"><input type='password' name='pass' onfocus="validatePass(document.getElementById('p1'), this);" oninput="validatePass(document.getElementById('p1'), this);"></div>
+		</td></tr>	
+		<tr>
+			<td colspan=2 align=center>
+		  <input type="submit" name="Submit" value="Sign Up" id="signup-btn" />
+		 </td>
+		</tr>  
+		</table>
+	</form>	
+	</div>
+</html>

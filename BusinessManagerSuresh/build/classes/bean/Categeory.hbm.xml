@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 29, 2013 9:01:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="bean.Categeory" table="categeory" catalog="suresh_shop">
+        <id name="categoryId" type="java.lang.Integer">
+            <column name="CATEGORY_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="categoryName" type="string">
+            <column name="CATEGORY_NAME" length="45" not-null="true" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="REMARKS" length="45" not-null="true" />
+        </property>
+        <set name="products" inverse="true">
+            <key>
+                <column name="CATEGORY_ID" not-null="true" />
+            </key>
+            <one-to-many class="bean.Product" />
+        </set>
+    </class>
+</hibernate-mapping>

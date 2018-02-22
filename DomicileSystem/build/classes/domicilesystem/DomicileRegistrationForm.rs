@@ -1,0 +1,2 @@
+domicile.managemet.system.DomicileRegistrationForm$1
+domicile.managemet.system.DomicileRegistrationForm

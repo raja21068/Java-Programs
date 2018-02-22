@@ -1,0 +1,15 @@
+<xml>
+<school>
+<student>
+	<name>Ali</name>
+	<subject>Java</subject>
+	<rollno>2k9/it/55</rollno>
+</student>
+<student>
+	<name>Imran</name>
+	<subject>Vb</subject>
+	<rollno>2k9/it/52</rollno>
+
+</student>
+</school>
+</xml>

@@ -1,0 +1,11 @@
+Date:18/03/2005
+
+This program sucessfully Transmiting video to destination clients
+on the Transmitter side we r using cloning technique.....
+
+
+Video Capture device must attach with the transmitter system
+if the program does not detect the device please run the jmfregistry and detect the capture devices
+
+
+

@@ -1,0 +1,40 @@
+The Distributed Garbage Collector
+---------------------------------
+
+one of the design objectives of RMI specifications was to keep the client perspective of remote 
+objects the same as other objects within own JVM.
+
+This implies that remote objects should also be subjected to garbage collection.
+
+
+The RMI system provides a reference counting distributed garbage collection algorithm based on 
+Modula-3's Network Objects.
+
+
+Internaly, the server keeps tracks of which clients have requested access to the remote object.
+
+when reference is made, the server marks object as Dirty and when all clients have dropped the 
+reference, it is marked as being clean.  
+
+A clean object is marked for garbage collection.
+
+
+
+
+In addition to the reference counting mechanism on the server,
+when client obtains a reference, it actually has lease to the object for a specific time.
+
+if client does not refresh the connection, by making additional dirty calls to the remote object
+before the lease term expires, the DGC then assumes that the remote object is no longer reference 
+by that client (the reference is considered to be dead.) and the remote object may be garbage
+collected.
+
+
+The lease time is controlled by the system property "java.rmi.dgc.leaseValue".
+(value is in milliseconds and defaults to 10 minutes).
+
+ System.setProperty("java.rmi.dgc.leaseValue","60*60*1000");
+
+
+
+

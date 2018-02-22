@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+      <hibernate-mapping>
+          <class name="STUDENTPARTREG" table="STUDENT_PART_REG">
+               <meta attribute="class-description">
+               </meta>
+               <id name="stdPartRegId" type="int" column="std_part_reg_id">
+                     <generator class="native"/>
+               </id>
+               <property name="partId" column="part_id" type="int"/>
+               <property name="stdId" column="std_id" type="int"/>
+               <property name="scractchCardId" column="scractch_card_id" type="int"/>
+               <property name="status" column="status" type="int"/>
+               <property name="dataOfPaid" column="data_of_paid" type="date"/>
+               <property name="remarks" column="remarks" type="string"/>
+               <property name="chalanNo" column="ChalanNo" type="string"/>
+               <property name="amount" column="amount" type="int"/>
+
+           </class>
+      </hibernate-mapping>

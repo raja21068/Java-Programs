@@ -1,0 +1,2 @@
+javac DynamicServer.java
+pause..

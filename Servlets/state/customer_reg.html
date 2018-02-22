@@ -1,0 +1,71 @@
+<html>
+
+	<script>
+		function checkPass(e1,e2){
+			if(e1.value!=e2.value){
+				e2.setCustomValidity("Password Incorrect");
+			}
+		}
+	</script>
+<body background='images/background.jpg'>
+<center>
+<font face=\"Imprint MT Shadow\" size=5> Registration Form for Uploading the Property </font>
+
+
+<form action=RegistrationServlet>
+
+<TABLE>
+<TR>
+<TD>First Name </TD>
+<TD><input type=text size=40 name=first_name required='required'></TD>
+</TR>
+
+<TR>
+<TD>Last Name</TD>
+<TD><input type=text size=50 name=last_name required='required'></TD>
+</TR>
+
+<TR>
+<TD>City</TD>
+<TD><input type=text name=city required='required'></TD>
+</TR>
+
+<TR>
+<TD>Address</TD>
+<TD><input type=text size=30 name=address required='required'></TD>
+</TR>
+
+
+<TR>
+<TD>Contact No</TD>
+<TD><input type=text name=contact_no required='required'></TD>
+</TR>
+
+<TR>
+<TD>email</TD>
+<TD><input type=text size=30 name=email required='required'></TD>
+</TR>
+
+
+<TR>
+<TD>User</TD>
+<TD><input type=text size=30 name=user required='required'></TD>
+</TR>
+
+
+<TR>
+<TD>Password</TD>
+<TD><input type=password size=30 name=password required='required'></TD>
+</TR>
+
+
+
+<TR>
+<TD>Re_type Password</TD>
+<TD><input type=Password size=30 name=re_type_password oninput="checkPass(document.getElementById('password'),this);" onfocus="checkPass(document.getElementById('password'),this);"  required='required'></TD>
+</TR>
+
+<TR>
+<TD COLSPAN=2><input type=submit value='Register'></TD>
+</TR>
+

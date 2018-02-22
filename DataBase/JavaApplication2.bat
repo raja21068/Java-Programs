@@ -1,0 +1,3 @@
+javac MainMenuDataBase.java
+java MainMenuDataBase
+pause

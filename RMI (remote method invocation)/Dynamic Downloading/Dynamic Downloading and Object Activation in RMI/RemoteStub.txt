@@ -1,0 +1,25 @@
+RemoteStub is the superclass for all remote stub classes.
+
+these are the classes, they act as proxy, for remote call 
+from one JVM to another.
+
+when you run rmic,   the stub file that is produced is a 
+subclass of RemoteStub.
+
+It implements same remote interface as the original remote class,
+but proxies all of the remote methods into remote method call 
+on the actual remote object implementation
+(by connecting to and communicating with the skeleton).
+
+
+when you look up a remote reference in a naming registry,
+you actually receive an instance of this stub class.
+
+
+by itself, the RemoteStub class provides no methods of particular use.
+
+
+
+
+
+ 

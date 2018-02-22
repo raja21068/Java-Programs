@@ -1,0 +1,2 @@
+javac HelloClient.java
+pause..

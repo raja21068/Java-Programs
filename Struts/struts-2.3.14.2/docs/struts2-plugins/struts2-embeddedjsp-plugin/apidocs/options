@@ -1,0 +1,26 @@
+-classpath
+'/Users/rene/DevHome/Struts2/Struts2-Work/STRUTS_2_3_14_X/target/checkout/plugins/embeddedjsp/target/classes:/Users/rene/.m2/repository/asm/asm-commons/3.3/asm-commons-3.3.jar:/Users/rene/.m2/repository/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar:/Users/rene/.m2/repository/org/apache/tomcat/juli/6.0.18/juli-6.0.18.jar:/Users/rene/.m2/repository/org/apache/tomcat/jasper/6.0.18/jasper-6.0.18.jar:/Users/rene/.m2/repository/org/freemarker/freemarker/2.3.19/freemarker-2.3.19.jar:/Users/rene/DevHome/Struts2/Struts2-Work/STRUTS_2_3_14_X/target/checkout/xwork-core/target/xwork-core-2.3.14.2.jar:/Users/rene/.m2/repository/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar:/Users/rene/DevHome/Struts2/Struts2-Work/STRUTS_2_3_14_X/target/checkout/core/target/struts2-core-2.3.14.2.jar:/Users/rene/.m2/repository/org/apache/tomcat/jasper-jdt/6.0.18/jasper-jdt-6.0.18.jar:/Users/rene/.m2/repository/ognl/ognl/3.0.6/ognl-3.0.6.jar:/Users/rene/.m2/repository/asm/asm-tree/3.3/asm-tree-3.3.jar:/Users/rene/.m2/repository/org/apache/tomcat/el-api/6.0.18/el-api-6.0.18.jar:/Users/rene/.m2/repository/commons-io/commons-io/2.0.1/commons-io-2.0.1.jar:/Users/rene/.m2/repository/javassist/javassist/3.11.0.GA/javassist-3.11.0.GA.jar:/Users/rene/.m2/repository/org/apache/tomcat/jsp-api/6.0.18/jsp-api-6.0.18.jar:/Users/rene/.m2/repository/org/apache/tomcat/servlet-api/6.0.18/servlet-api-6.0.18.jar:/Users/rene/.m2/repository/org/apache/tomcat/catalina/6.0.18/catalina-6.0.18.jar:/Users/rene/.m2/repository/org/apache/tomcat/jasper-el/6.0.18/jasper-el-6.0.18.jar:/Users/rene/.m2/repository/commons-fileupload/commons-fileupload/1.2.2/commons-fileupload-1.2.2.jar:/Users/rene/.m2/repository/asm/asm/3.3/asm-3.3.jar:/Users/rene/.m2/repository/org/apache/tomcat/annotations-api/6.0.18/annotations-api-6.0.18.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/Users/rene/DevHome/Struts2/Struts2-Work/STRUTS_2_3_14_X/target/checkout/plugins/embeddedjsp/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2000-2013 <a href="http://www.apache.org">Apache Software Foundation</a>. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/rene/DevHome/Struts2/Struts2-Work/STRUTS_2_3_14_X/target/checkout/plugins/embeddedjsp/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Struts 2 Embedded JSP Plugin 2.3.14.2 API'
+-linkoffline
+'http://download.oracle.com/javase/1.5.0/docs/api' '/Users/rene/DevHome/Struts2/Struts2-Work/STRUTS_2_3_14_X/target/checkout/plugins/embeddedjsp/target/javadoc-bundle-options'
+-linkoffline
+'http://struts.apache.org/2.x/struts2-core/apidocs' '/Users/rene/DevHome/Struts2/Struts2-Work/STRUTS_2_3_14_X/target/checkout/core/target/apidocs'
+-use
+-version
+-windowtitle
+'Struts 2 Embedded JSP Plugin 2.3.14.2 API'

@@ -1,0 +1,8 @@
+MIDlet-1: TestGPS, TestGPS.png, Connection
+MIDlet-Jar-Size: 20203
+MIDlet-Jar-URL: TestGPS.jar
+MIDlet-Name: TestGPS
+MIDlet-Vendor: Unknown
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.1

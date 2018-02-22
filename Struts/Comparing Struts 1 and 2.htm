@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0073)http://struts.apache.org/release/2.1.x/docs/comparing-struts-1-and-2.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/space.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/master.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/wiki-content.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/abs.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/menu.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/menu-ie.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/tables.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/panels.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/master-ie.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/renderer-macros.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/content-types.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/login.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/information-macros.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/layout-macros.css">
+<link type="text/css" rel="stylesheet" href="./Comparing Struts 1 and 2_files/default-theme.css">
+<!-- currently inaccessible, would remove, but there is no version control on confluence or templates, so commenting out for now - WW
+    <link type="text/css" rel="stylesheet" href="http://cwiki.apache.org/confluence/download/resources/confluence.ext.code:code/shStyles.css">
+-->
+    <style type="text/css">
+      .dp-highlighter {
+        width:95% !important;
+      }
+    </style>
+    <style type="text/css">
+      .footer {
+        background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+        background-repeat:     repeat-x;
+        background-position:   left top;
+        padding-top:           4px;
+        color:                 #666;
+      }
+    </style>
+    <script type="text/javascript" language="javascript">
+      var hide = null;
+      var show = null;
+      var children = null;
+
+      function init() {
+        /* Search form initialization */
+        var form = document.forms['search'];
+        if (form != null) {
+          form.elements['domains'].value = location.hostname;
+          form.elements['sitesearch'].value = location.hostname;
+        }
+
+        /* Children initialization */
+        hide = document.getElementById('hide');
+        show = document.getElementById('show');
+        children = document.all != null ?
+                   document.all['children'] :
+                   document.getElementById('children');
+        if (children != null) {
+          children.style.display = 'none';
+          show.style.display = 'inline';
+          hide.style.display = 'none';
+        }
+      }
+
+      function showChildren() {
+        children.style.display = 'block';
+        show.style.display = 'none';
+        hide.style.display = 'inline';
+      }
+
+      function hideChildren() {
+        children.style.display = 'none';
+        show.style.display = 'inline';
+        hide.style.display = 'none';
+      }
+    </script>
+    <title>Comparing Struts 1 and 2</title>
+  </head>
+  <body onload="init()">
+    <table border="0" cellpadding="2" cellspacing="0" width="100%">
+      <tbody><tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" nowrap="">
+          &nbsp;<a href="http://struts.apache.org/release/2.1.x/docs/home.html" title="Apache Struts 2 Documentation">Apache Struts 2 Documentation</a>&nbsp;&gt;&nbsp;<a href="http://struts.apache.org/release/2.1.x/docs/home.html" title="Home">Home</a>&nbsp;&gt;&nbsp;<a href="http://struts.apache.org/release/2.1.x/docs/guides.html" title="Guides">Guides</a>&nbsp;&gt;&nbsp;<a href="http://struts.apache.org/release/2.1.x/docs/migration-guide.html" title="Migration Guide">Migration Guide</a>&nbsp;&gt;&nbsp;<a href="" title="Comparing Struts 1 and 2">Comparing Struts 1 and 2</a>
+        </td>
+        <td align="right" valign="middle" nowrap="">
+          <form name="search" action="http://www.google.com/search" method="get">
+            <input type="hidden" name="ie" value="UTF-8">
+            <input type="hidden" name="oe" value="UTF-8">
+            <input type="hidden" name="domains" value="struts.apache.org">
+            <input type="hidden" name="sitesearch" value="struts.apache.org">
+            <input type="text" name="q" maxlength="255" value="">        
+            <input type="submit" name="btnG" value="Google Search">
+          </form>
+        </td>
+      </tr> 
+    </tbody></table>
+
+    <div id="PageContent">
+      <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px" class="pagetitle">Comparing Struts 1 and 2</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+          <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14048">
+            <img src="./Comparing Struts 1 and 2_files/notep_16.gif" height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14048">Edit Page</a>
+          &nbsp;
+          <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+            <img src="./Comparing Struts 1 and 2_files/browse_space.gif" height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+          &nbsp;
+          <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14048">
+            <img src="./Comparing Struts 1 and 2_files/add_page_16.gif" height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+          <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14048">Add Page</a>
+          &nbsp;
+          <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14048">
+            <img src="./Comparing Struts 1 and 2_files/add_blogentry_16.gif" height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+          <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14048">Add News</a>
+        </div>
+      </div>
+      <div class="pagesubheading" style="margin: 0px 10px 0px 10px;">
+        #editReport()
+      </div>
+
+      <div class="pagecontent">
+        <div class="wiki-content">
+          <div class="table-wrap">
+<table class="confluenceTable"><tbody>
+<tr>
+<th class="confluenceTh"> Feature </th>
+<th class="confluenceTh"> Struts 1 </th>
+<th class="confluenceTh"> Struts 2 </th>
+</tr>
+<tr>
+<th class="confluenceTh"> Action classes </th>
+<td class="confluenceTd"> Struts 1 requires Action classes to extend an abstract base class. A common problem in Struts 1 is programming to abstract classes instead of interfaces. </td>
+<td class="confluenceTd"> An Struts 2 Action <em>may</em> implement an <tt>Action</tt> interface, along with other interfaces to enable optional and custom services. Struts 2 provides a base ActionSupport class to implement commonly used interfaces. Albeit, the Action interface is <b>not</b> required. Any POJO object with a <tt>execute</tt> signature can be used as an Struts 2 Action object. </td>
+</tr>
+<tr>
+<th class="confluenceTh"> Threading Model </th>
+<td class="confluenceTd"> Struts 1 Actions are singletons and must be thread-safe since there will only be one instance of a class to handle all requests for that Action. The singleton strategy places restrictions on what can be done with Struts 1 Actions and requires extra care to develop. Action resources must be thread-safe or synchronized. </td>
+<td class="confluenceTd"> Struts 2 Action objects are instantiated for each request, so there are no thread-safety issues. (In practice, servlet containers generate many throw-away objects per request, and one more object does not impose a performance penalty or impact garbage collection.) </td>
+</tr>
+<tr>
+<th class="confluenceTh"> Servlet Dependency </th>
+<td class="confluenceTd"> Struts 1 Actions have dependencies on the servlet API since the HttpServletRequest and HttpServletResponse is passed to the <tt>execute</tt> method when an Action is invoked. </td>
+<td class="confluenceTd"> Struts 2 Actions are not coupled to a container. Most often the servlet contexts are represented as simple Maps, allowing Actions to be tested in isolation. Struts 2 Actions can still access the original request and response, if required. However, other architectural elements reduce or eliminate the need to access the HttpServetRequest or HttpServletResponse directly. </td>
+</tr>
+<tr>
+<th class="confluenceTh"> Testability </th>
+<td class="confluenceTd"> A major hurdle to testing Struts 1 Actions is that the <tt>execute</tt> method exposes the Servlet API. A third-party extension, Struts TestCase, offers a set of mock object for Struts 1. </td>
+<td class="confluenceTd"> Struts 2 Actions can be tested by instantiating the Action, setting properties, and invoking methods. Dependency Injection support also makes testing simpler. </td>
+</tr>
+<tr>
+<th class="confluenceTh"> Harvesting Input </th>
+<td class="confluenceTd"> Struts 1 uses an ActionForm object to capture input. Like Actions, all ActionForms must extend a base class. Since&nbsp; other JavaBeans cannot be used as ActionForms, developers often create redundant classes to capture input. DynaBeans can used as an alternative to creating conventional ActionForm classes, but, here too, developers may be redescribing existing JavaBeans. <br class="atl-forced-newline"> </td>
+<td class="confluenceTd"> Struts 2 uses Action properties as input properties, eliminating the need for a second input object. Input properties may be rich object types which may have their own properties. The Action properties can be accessed from the web page via the taglibs. Struts 2 also supports the ActionForm pattern, as well as POJO form objects and POJO Actions. Rich object types, including business or domain objects, can be used as input/output objects. The ModelDriven feature simplifies taglb references to POJO input objects. <br class="atl-forced-newline"> </td>
+</tr>
+<tr>
+<th class="confluenceTh"> Expression Language </th>
+<td class="confluenceTd"> Struts 1 integrates with JSTL, so it uses the JSTL EL. The EL has basic object graph traversal, but relatively weak collection and indexed property support. </td>
+<td class="confluenceTd"> Struts 2 can use JSTL, but the framework also supports a more powerful and flexible expression language called "Object Graph Notation Language" (OGNL). </td>
+</tr>
+<tr>
+<th class="confluenceTh"> Binding values into views </th>
+<td class="confluenceTd"> Struts 1 uses the standard JSP mechanism for binding objects into the page context for access. </td>
+<td class="confluenceTd"> Struts 2 uses a "ValueStack" technology so that the taglibs can access values without coupling your view to the object type it is rendering. The ValueStack strategy allows reuse of views across a range of types which may have the same property name but different property types. <br class="atl-forced-newline"> </td>
+</tr>
+<tr>
+<th class="confluenceTh"> Type Conversion </th>
+<td class="confluenceTd"> Struts 1 ActionForm properties are usually all Strings. Struts 1 uses Commons-Beanutils for type conversion. Converters are per-class, and not configurable per instance. </td>
+<td class="confluenceTd"> Struts 2 uses OGNL for type conversion. The framework includes converters for basic and common object types and primitives. </td>
+</tr>
+<tr>
+<th class="confluenceTh"> Validation </th>
+<td class="confluenceTd"> Struts 1 supports manual validation via a <tt>validate</tt> method on the ActionForm, or through an extension to the Commons Validator. Classes can have different validation contexts for the same class, but cannot chain to validations on sub-objects. </td>
+<td class="confluenceTd"> Struts 2 supports manual validation via the <tt>validate</tt> method and the XWork Validation framework. The Xwork Validation Framework supports chaining validation into sub-properties using the validations defined for the properties class type and the validation context. </td>
+</tr>
+<tr>
+<th class="confluenceTh"> Control Of Action Execution </th>
+<td class="confluenceTd"> Struts 1 supports separate Request Processors (lifecycles) for each module, but all the Actions in the module must share the same lifecycle. </td>
+<td class="confluenceTd"> Struts 2 supports creating different lifecycles on a per Action basis via Interceptor Stacks. Custom stacks can be created and used with different Actions, as needed. </td>
+</tr>
+</tbody></table>
+</div>
+
+
+<div class="panelMacro"><table class="infoMacro"><colgroup><col width="24"><col></colgroup><tbody><tr><td valign="top"><img src="./Comparing Struts 1 and 2_files/information.gif" width="16" height="16" align="absmiddle" alt="" border="0"></td><td><b>See Also</b><br><ul>
+	<li>Matt Raible wrote (mid 2005) an interesting whitepaper where he compared various web frameworks. You can view the PDF here:
+	<ul>
+		<li><a href="https://equinox.dev.java.net/framework-comparison/WebFrameworks.pdf" class="external-link" rel="nofollow">https://equinox.dev.java.net/framework-comparison/WebFrameworks.pdf</a></li>
+		<li><a href="http://www.virtuas.com/files/osl-jwf-01.pdf" class="external-link" rel="nofollow">http://www.virtuas.com/files/osl-jwf-01.pdf</a></li>
+	</ul>
+	</li>
+</ul>
+</td></tr></tbody></table></div>
+
+<h2><a name="ComparingStruts1and2-Next%3AMigrationStrategies"></a>Next: <a href="http://struts.apache.org/release/2.1.x/docs/migration-strategies.html" title="Migration Strategies">Migration Strategies</a></h2>
+        </div>
+
+        
+      </div>
+    </div>
+    <div class="footer">
+      Generated by
+      <a href="http://www.atlassian.com/confluence/">Atlassian Confluence</a> (Version: 3.2 Build: 1810 Mar 16, 2010)
+      <a href="http://could.it/autoexport/">Auto Export Plugin</a> (Version: 1.0.0-dkulp)
+    </div>
+  
+</body></html>

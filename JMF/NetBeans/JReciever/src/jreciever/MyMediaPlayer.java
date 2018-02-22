@@ -1,0 +1,110 @@
+package jreciever;
+
+import java.awt.*;
+
+/**
+ * Title:        Clone Video Receing System
+ * Description:  This Program will receies simultanously videos from different locations
+ * Copyright:    Copyright (c) 2005
+ * Company:      IIT, University of Sindh, Jamshoro
+ * @author Sachal Joyo
+ * @version 1.0
+ */
+import java.awt.*;
+import javax.media.*;
+import javax.media.control.TrackControl;
+import javax.media.format.*;
+import javax.media.protocol.*;
+import javax.media.protocol.DataSource;
+
+public class MyMediaPlayer extends Frame implements ControllerListener {
+
+    Player p;
+    Object waitSync = new Object();
+    boolean stateTransitionOK = true;
+
+
+    public boolean open(DataSource ds) {
+	System.err.println("create player for: " + ds.getContentType());
+	try {
+	    p = Manager.createPlayer(ds);
+	} catch (Exception e) {
+	    System.err.println("Failed to create a player from the given DataSource: " + e);
+	    return false;
+	}
+
+	p.addControllerListener(this);
+
+	// Realize the player.
+	p.prefetch();
+	if (!waitForState(p.Prefetched)) {
+	    System.err.println("Failed to realize the player.");
+	    return false;
+	}
+
+	// Display the visual & control component if there's one.
+
+	setLayout(new BorderLayout());
+
+	Component cc;
+
+	Component vc;
+	if ((vc = p.getVisualComponent()) != null) {
+	    add("Center", vc);
+	}
+
+	if ((cc = p.getControlPanelComponent()) != null) {
+	    add("South", cc);
+	}
+
+	// Start the player.
+	p.start();
+        this.setBounds(50,50,200,200);
+	setVisible(true);
+	return true;
+    }
+
+    public void addNotify() {
+	super.addNotify();
+	pack();
+    }
+
+    /**
+     * Block until the player has transitioned to the given state.
+     * Return false if the transition failed.
+     */
+    boolean waitForState(int state) {
+	synchronized (waitSync) {
+	    try {
+		while (p.getState() < state && stateTransitionOK)
+		    waitSync.wait();
+	    } catch (Exception e) {}
+	}
+	return stateTransitionOK;
+    }
+
+
+    /**
+     * Controller Listener.
+     */
+    public void controllerUpdate(ControllerEvent evt) {
+
+	if (evt instanceof ConfigureCompleteEvent ||
+	    evt instanceof RealizeCompleteEvent ||
+	    evt instanceof PrefetchCompleteEvent) {
+	    synchronized (waitSync) {
+		stateTransitionOK = true;
+		waitSync.notifyAll();
+	    }
+	} else if (evt instanceof ResourceUnavailableEvent) {
+	    synchronized (waitSync) {
+		stateTransitionOK = false;
+		waitSync.notifyAll();
+	    }
+	} else if (evt instanceof EndOfMediaEvent) {
+	    p.close();
+	    //System.exit(0);
+	} else if (evt instanceof SizeChangeEvent) {
+	}
+    }
+}//end class

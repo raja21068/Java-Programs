@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+      <hibernate-mapping>
+          <class name="Batch" table="batch">
+               <meta attribute="class-description">
+               </meta>
+               <id name="batchID" type="int" column="Batch_ID">
+                     <generator class="native"/>
+               </id>
+               <property name="progID" column="Prog_ID" type="int"/>
+               <property name="batchYear" column="Batch_year" type="int"/>
+               <property name="shift" column="Shift" type="int"/>
+               <property name="group" column="Group" type="int"/>
+               <property name="session" column="session" type="int"/>
+               <property name="remarks" column="Remarks" type="string"/>
+
+           </class>
+      </hibernate-mapping>

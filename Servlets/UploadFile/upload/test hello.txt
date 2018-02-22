@@ -1,0 +1,7 @@
+Install the Avast Internet Security.exe
+
+During initial installation, it asks for Trial version or to supply for licence.
+
+Choose the licence directory and click next all the way.
+
+Thats allll. Tq

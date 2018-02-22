@@ -1,0 +1,8 @@
+MIDlet-1: bouncingBalls, bouncingBalls.png, bouncingBalls
+MIDlet-Jar-Size: 4140
+MIDlet-Jar-URL: bouncingBalls.jar
+MIDlet-Name: bouncingBalls
+MIDlet-Vendor: Unknown
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.0
+MicroEdition-Profile: MIDP-2.0

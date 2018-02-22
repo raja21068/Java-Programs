@@ -1,0 +1,2 @@
+javac Abc.java
+pause..
